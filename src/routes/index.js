@@ -3,6 +3,7 @@ import VueRouter from 'vue-router';
 import AccountView from "../views/AccountView";
 import LoginView from "../views/LoginView";
 import CartView from "../views/CartView";
+import ProductsView from "../views/ProductsView";
 
 Vue.use(VueRouter);
 
@@ -32,6 +33,11 @@ export const router = new VueRouter({
             name: 'cart',
             component: CartView
         },
+        {
+            path: '/products',
+            name: 'products',
+            component: ProductsView
+        }
     ]
 
 });

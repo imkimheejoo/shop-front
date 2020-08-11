@@ -25,8 +25,10 @@
         },
         methods: {
             searchByKeyword() {
-                // todo axios
-                console.log(this.search);
+                this.$store.dispatch("FETCH_PRODUCTS", 'keyword', this.search)
+                    .then(() => {
+                        window.location.href = `http://localhost:8080/products/keyword/${this.search}`;
+                    })
             }
         }
     }
