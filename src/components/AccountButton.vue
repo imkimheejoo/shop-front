@@ -1,10 +1,10 @@
 <template>
     <div>
-        <a href="/mypage" v-if="account">
+        <router-link to="/mypage" v-if="account">
             <v-icon icon color="grey lighten-2" large>
                 mdi-account-circle
             </v-icon>
-        </a>
+        </router-link>
 
         <a href="/logout" v-if="account">
             <v-icon icon color="grey lighten-2" large>
@@ -12,22 +12,23 @@
             </v-icon>
         </a>
 
-        <a href="/login" v-if="!account">
+        <router-link to="/login" v-if="!account">
             <v-icon icon color="grey lighten-2" large>
                 mdi-lock
             </v-icon>
-        </a>
+        </router-link>
 
         <div class="text-xs-center" v-if="account">
-            <!--            <v-badge left>-->
-            <!--                <span slot="badge">6</span>-->
-            <v-icon large color="grey lighten-2">mdi-cart-outline</v-icon>
-            <!--            </v-badge>-->
-
-            <!--            <v-badge color="red">-->
-            <!--                <span slot="badge">!</span>-->
-            <v-icon large color="grey lighten-2">mdi-bell-ring-outline</v-icon>
-            <!--            </v-badge>-->
+            <router-link to="/cart">
+                <!--            <v-badge left>-->
+                <!--                <span slot="badge">6</span>-->
+                <v-icon large color="grey lighten-2">mdi-cart-outline</v-icon>
+                <!--            </v-badge>-->
+            </router-link>
+                <!--            <v-badge color="red">-->
+                <!--                <span slot="badge">!</span>-->
+                <v-icon large color="grey lighten-2">mdi-bell-ring-outline</v-icon>
+                <!--            </v-badge>-->
         </div>
     </div>
 </template>
