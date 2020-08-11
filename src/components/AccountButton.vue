@@ -25,10 +25,6 @@
                 <v-icon large color="grey lighten-2">mdi-cart-outline</v-icon>
                 <!--            </v-badge>-->
             </router-link>
-                <!--            <v-badge color="red">-->
-                <!--                <span slot="badge">!</span>-->
-                <v-icon large color="grey lighten-2">mdi-bell-ring-outline</v-icon>
-                <!--            </v-badge>-->
         </div>
     </div>
 </template>
