@@ -4,8 +4,15 @@ import AccountView from "../views/AccountView";
 import LoginView from "../views/LoginView";
 import CartView from "../views/CartView";
 import ProductsView from "../views/ProductsView";
+import store from '../store';
 
 Vue.use(VueRouter);
+
+const requireAuth = () => (from, to, next) => {
+    store.state.accessToken ? 
+      next() :
+      next(`/login?returnPath=${encodeURIComponent(from.path)}`)
+  }
 
 export const router = new VueRouter({
     mode: 'history',
@@ -15,14 +22,9 @@ export const router = new VueRouter({
             path: '/mypage',
             name: 'mypage',
             component: AccountView,
-
-            // todo token 없으면 /login으로 리다이렉
-            beforeEnter: (to, from, next) => {
-                console.log('to', to);
-                console.log('from', from);
-                next();
-            }
+            beforeEnter:requireAuth()
         },
+
         {
             path: '/login',
             name: 'login',
@@ -31,12 +33,13 @@ export const router = new VueRouter({
         {
             path: '/cart',
             name: 'cart',
-            component: CartView
+            component: CartView,
+            beforeEnter:requireAuth()
         },
         {
             path: '/products',
             name: 'products',
-            component: ProductsView
+            component: ProductsView,
         }
     ]
 
