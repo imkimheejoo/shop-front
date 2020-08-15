@@ -4,6 +4,7 @@ import AccountView from "../views/AccountView";
 import LoginView from "../views/LoginView";
 import CartView from "../views/CartView";
 import ProductsView from "../views/ProductsView";
+import IndexView from "../views/IndexView"
 import store from '../store';
 
 Vue.use(VueRouter);
@@ -18,6 +19,10 @@ export const router = new VueRouter({
     mode: 'history',
 
     routes: [
+        {
+            path: '/',
+            component: IndexView
+        },
         {
             path: '/mypage',
             name: 'mypage',
