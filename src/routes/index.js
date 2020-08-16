@@ -10,10 +10,10 @@ import store from '../store';
 Vue.use(VueRouter);
 
 const requireAuth = () => (from, to, next) => {
-    store.state.accessToken ? 
-      next() :
-      next(`/login?returnPath=${encodeURIComponent(from.path)}`)
-  }
+    store.state.accessToken ?
+        next() :
+        next(`/login?returnPath=${encodeURIComponent(from.path)}`)
+}
 
 export const router = new VueRouter({
     mode: 'history',
@@ -21,13 +21,25 @@ export const router = new VueRouter({
     routes: [
         {
             path: '/',
-            component: IndexView
+            component: IndexView,
+            // beforeEnter: (to, from, next) => {
+            //     console.log('to', to);     //to: 이동할 url의 라우팅 정보
+            //     console.log('from', from); //from: 현재 url의 라우팅 정보
+            //     console.log('next', next); //next:
+            //     store.dispatch('FETCH_PRODUCT') 
+            //         .then(() => {
+            //             console.log('success');
+            //             next();
+            //         }).catch((error) => {
+            //         console.log(error);
+            //     });
+            // }
         },
         {
             path: '/mypage',
             name: 'mypage',
             component: AccountView,
-            beforeEnter:requireAuth()
+            beforeEnter: requireAuth()
         },
 
         {
@@ -39,10 +51,10 @@ export const router = new VueRouter({
             path: '/cart',
             name: 'cart',
             component: CartView,
-            beforeEnter:requireAuth()
+            beforeEnter: requireAuth()
         },
         {
-            path: '/products',
+            path: '/products/:id',
             name: 'products',
             component: ProductsView,
         }

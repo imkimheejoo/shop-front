@@ -9,7 +9,44 @@ const store = new Vuex.Store({
     state: {
         account: {},
         accessToken: null,
-        products: []
+        products: [
+            {
+                "id":1,
+                "title":"제목1",
+                "price":"10000",
+                "options":[
+                    "ivory","black"
+                ],
+                "thumbnailUrl" : "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+            },
+            {
+                "id":2,
+                "title":"제목2",
+                "price":"20000",
+                "options":[
+                    "ivory","black"
+                ],
+                "thumbnailUrl" : "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+            },
+            {
+                "id":3,
+                "title":"제목3",
+                "price":"30000",
+                "options":[
+                    "ivory","black"
+                ],
+                "thumbnailUrl" : "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+            }
+            ,   {
+                "id":4,
+                "title":"제목4",
+                "price":"40000",
+                "options":[
+                    "ivory","black"
+                ],
+                "thumbnailUrl" : "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+            }
+        ]
     },
     mutations: {
         LOGIN(state, { accessToken }) {
@@ -38,7 +75,7 @@ const store = new Vuex.Store({
             const response = await fetchProducts(pageName, param);
             commit('SET_PRODUCTS', response.data);
             return response;
-        }
+        },
     },
     getters: {
         isAuthenticated(state) {

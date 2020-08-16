@@ -1,30 +1,30 @@
 <template>
-   <v-hover
-        v-slot:default="{ hover }"
-        open-delay="200"
-      >
-    <v-card-actions @click="showProduct">
-      <v-card width="250" :elevation="hover ? 16 : 2">
-        <v-img src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" height="200px"></v-img>
-
-        <v-card-title>상품명</v-card-title>
-        <v-card-subtitle>옵션들</v-card-subtitle>
-        <v-card-subtitle>상품가격</v-card-subtitle>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-        </v-card-actions>
+  <router-link style="text-decoration:none;" :to="`/products/${product.id}`">
+    <v-hover v-slot:default="{ hover }" open-delay="200">
+      <v-card @click="showProduct" width="250" :elevation="hover ? 16 : 2">
+        <v-img :src="product.thumbnailUrl" height="200px"></v-img>
+        <v-list-item three-line>
+          <v-list-item-content>
+            <v-list-item-title class="mb-1">{{product.title}}</v-list-item-title>
+            <v-list-item-subtitle>{{aa(product.options)}}</v-list-item-subtitle>
+            <v-list-item-subtitle class="black--text text--darken-5">{{product.price}}원</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
       </v-card>
-    </v-card-actions>
-  </v-hover>
+    </v-hover>
+  </router-link>
 </template>
 
 <script>
 export default {
+  props: ["product"],
   methods: {
     showProduct() {
       console.log("show Product");
     },
+    aa(options) {
+      return options.join('/');
+    }
   },
 };
 </script>
