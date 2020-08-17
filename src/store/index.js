@@ -9,7 +9,7 @@ const store = new Vuex.Store({
     state: {
         account: {},
         accessToken: null,
-        products: []
+        products: {}
     },
     mutations: {
         LOGIN(state, { accessToken }) {
@@ -34,11 +34,12 @@ const store = new Vuex.Store({
             commit('LOGIN', response.data);
             return response;
         },
-        async FETCH_PRODUCT({ commit }, pageName, param) {
-            const response = await fetchProducts(pageName, param);
+        async FETCH_PRODUCTS({ commit }) {
+            console.log('zzz')
+            const response = await fetchProducts();
             commit('SET_PRODUCTS', response.data);
             return response;
-        }
+        },
     },
     getters: {
         isAuthenticated(state) {
