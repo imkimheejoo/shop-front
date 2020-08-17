@@ -9,44 +9,7 @@ const store = new Vuex.Store({
     state: {
         account: {},
         accessToken: null,
-        products: [
-            {
-                "id":1,
-                "title":"제목1",
-                "price":"10000",
-                "options":[
-                    "ivory","black"
-                ],
-                "thumbnailUrl" : "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-            },
-            {
-                "id":2,
-                "title":"제목2",
-                "price":"20000",
-                "options":[
-                    "ivory","black"
-                ],
-                "thumbnailUrl" : "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-            },
-            {
-                "id":3,
-                "title":"제목3",
-                "price":"30000",
-                "options":[
-                    "ivory","black"
-                ],
-                "thumbnailUrl" : "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-            }
-            ,   {
-                "id":4,
-                "title":"제목4",
-                "price":"40000",
-                "options":[
-                    "ivory","black"
-                ],
-                "thumbnailUrl" : "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-            }
-        ]
+        products: {}
     },
     mutations: {
         LOGIN(state, { accessToken }) {
@@ -71,8 +34,9 @@ const store = new Vuex.Store({
             commit('LOGIN', response.data);
             return response;
         },
-        async FETCH_PRODUCT({ commit }, pageName, param) {
-            const response = await fetchProducts(pageName, param);
+        async FETCH_PRODUCTS({ commit }) {
+            console.log('zzz')
+            const response = await fetchProducts();
             commit('SET_PRODUCTS', response.data);
             return response;
         },

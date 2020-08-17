@@ -57,9 +57,9 @@ export {
     fetchProducts
 }
 
-function fetchProducts(pageName, param) {
+function fetchProducts() {
     try {
-        return axios.get(`${domain}/products/${pageName}/${param}`);
+        return axios.get(`/api/products`);
     } catch (error) {
         window.alert(error);
     }

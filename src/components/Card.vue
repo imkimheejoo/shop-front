@@ -6,7 +6,7 @@
         <v-list-item three-line>
           <v-list-item-content>
             <v-list-item-title class="mb-1">{{product.title}}</v-list-item-title>
-            <v-list-item-subtitle>{{aa(product.options)}}</v-list-item-subtitle>
+            <v-list-item-subtitle>{{convertOptions(product.options)}}</v-list-item-subtitle>
             <v-list-item-subtitle class="black--text text--darken-5">{{product.price}}원</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
@@ -22,7 +22,7 @@ export default {
     showProduct() {
       console.log("show Product");
     },
-    aa(options) {
+    convertOptions(options) {
       return options.join('/');
     }
   },

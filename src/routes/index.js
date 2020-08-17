@@ -22,18 +22,15 @@ export const router = new VueRouter({
         {
             path: '/',
             component: IndexView,
-            // beforeEnter: (to, from, next) => {
-            //     console.log('to', to);     //to: 이동할 url의 라우팅 정보
-            //     console.log('from', from); //from: 현재 url의 라우팅 정보
-            //     console.log('next', next); //next:
-            //     store.dispatch('FETCH_PRODUCT') 
-            //         .then(() => {
-            //             console.log('success');
-            //             next();
-            //         }).catch((error) => {
-            //         console.log(error);
-            //     });
-            // }
+            beforeEnter: (to, from, next) => {
+                store.dispatch('FETCH_PRODUCTS')
+                    .then(() => {
+                        console.log('success');
+                        next();
+                    }).catch((error) => {
+                        console.log(error);
+                    });
+            }
         },
         {
             path: '/mypage',

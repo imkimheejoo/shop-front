@@ -1,8 +1,8 @@
 <template>
   <v-container class="mt-5">
-    <v-row align="center" justify="center">
+    <v-row  v-if="this.products" align="center" justify="center">
       <Card
-        v-for="(product,index) in this.products"
+        v-for="(product,index) in this.products.contents"
         class="ma-2"
         :key="index"
         cols="12"
@@ -14,7 +14,7 @@
     </v-row>
     <v-row>
       <v-col class="text-center mt-5">
-        <v-pagination v-model="page" :length="6"></v-pagination>
+        <v-pagination v-model="page" :length="products.totalPages" total-visible="7"></v-pagination>
       </v-col>
     </v-row>
   </v-container>
@@ -22,20 +22,26 @@
 
 <script>
 import Card from "../components/Card";
-import {mapState} from 'vuex';
+import { mapState, mapActions } from "vuex";
 export default {
-  data(){
-    return{
-      page:3
-    }
+  watch: {
+    page() {
+      this.FETCH_PRODUCTS(this.page);
+    },
+  },
+  data() {
+    return {
+      page: 3,
+    };
   },
   components: {
-    Card
+    Card,
   },
-  computed:{
-    ...mapState([
-      'products'
-    ])
+  computed: {
+    ...mapState(["products"]),
+  },
+  methods: {
+    ...mapActions(["FETCH_PRODUCTS"])
   }
 };
 </script>
