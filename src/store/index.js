@@ -9,7 +9,16 @@ const store = new Vuex.Store({
     state: {
         account: {},
         accessToken: null,
-        products: {}
+        products: {},
+        product:{
+            'id': 1,
+            'title': '상품1',
+            'description': '이 상품1은 어쩌구저쩌구 블라블라',
+            'price' : 15000,
+            'options':['ivory', 'black'],
+            'thumbnailUrl' :  'https://cdn.vuetifyjs.com/images/cards/sunshine.jpg',
+            'content' : '이 상품은 어쩌구 저쩌구 뭐가 어떻고 저쩧고...'
+        }
     },
     mutations: {
         LOGIN(state, { accessToken }) {
@@ -44,7 +53,7 @@ const store = new Vuex.Store({
     getters: {
         isAuthenticated(state) {
             return !!state.accessToken;
-        }
+        },
     }
 });
 

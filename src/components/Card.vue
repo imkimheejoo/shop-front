@@ -16,15 +16,14 @@
 </template>
 
 <script>
+import {convertOptions} from '../util/util.js'
 export default {
   props: ["product"],
   methods: {
     showProduct() {
       console.log("show Product");
     },
-    convertOptions(options) {
-      return options.join('/');
-    }
+    convertOptions
   },
 };
 </script>
