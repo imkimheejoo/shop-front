@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-container class="mt-5">
-      <v-row>
+      <v-row class="justify-center">
         <ProductInfo></ProductInfo>
         <ProductDetail></ProductDetail>
         <Review></Review>
