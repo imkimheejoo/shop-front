@@ -5,7 +5,7 @@ const domain = "http://localhost:9090";
 const Unauthorized=401;
 const onUnauthorized = () => {
     router.push(`/login?returnPath=${encodeURIComponent(location.pathname)}`)
-}
+};
 
 export const setAuthInHeader = accessToken => {
     axios.defaults.headers.common['Authorization'] = accessToken ? `Bearer ${accessToken}` : null
@@ -43,18 +43,15 @@ const request = {
             window.alert(error);
         }
     }
-}
+};
 
 
 export const account = {
     login(payload) {
         return request.post('/api/accounts/login', payload);
     }
-}
+};
 
-export {
-    fetchProducts
-}
 
 function fetchProducts() {
     try {
@@ -62,4 +59,18 @@ function fetchProducts() {
     } catch (error) {
         window.alert(error);
     }
+}
+
+function fetchProduct(productId) {
+    try {
+        console.log(productId, "번 상품 가져옴");
+        return axios.get(`/api/products/1`);
+    } catch (error) {
+        window.alert(error);
+    }
+}
+
+export {
+    fetchProducts,
+    fetchProduct
 }

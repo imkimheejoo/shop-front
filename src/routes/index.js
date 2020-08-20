@@ -13,7 +13,7 @@ const requireAuth = () => (from, to, next) => {
     store.state.accessToken ?
         next() :
         next(`/login?returnPath=${encodeURIComponent(from.path)}`)
-}
+};
 
 export const router = new VueRouter({
     mode: 'history',
@@ -54,6 +54,14 @@ export const router = new VueRouter({
             path: '/products/:id',
             name: 'products',
             component: ProductsView,
+            beforeEnter: (to, from, next) => {
+                store.dispatch('FETCH_PRODUCT', to.params.id)
+                    .then(() => {
+                        next();
+                    }).catch((error) => {
+                        alert(error);
+                })
+            }
         }
     ]
 

@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { account, setAuthInHeader } from '../api'
-import { fetchProducts } from '../api/index'
+import { fetchProducts, fetchProduct } from '../api/index'
 
 Vue.use(Vuex);
 
@@ -10,15 +10,7 @@ const store = new Vuex.Store({
         account: {},
         accessToken: null,
         products: {},
-        product:{
-            'id': 1,
-            'title': '상품1',
-            'description': '이 상품1은 어쩌구저쩌구 블라블라',
-            'price' : 15000,
-            'options':['ivory', 'black'],
-            'thumbnailUrl' :  'https://cdn.vuetifyjs.com/images/cards/sunshine.jpg',
-            'content' : '이 상품은 어쩌구 저쩌구 뭐가 어떻고 저쩧고...'
-        }
+        product:{}
     },
     mutations: {
         LOGIN(state, { accessToken }) {
@@ -35,6 +27,9 @@ const store = new Vuex.Store({
         },
         SET_PRODUCTS(state, products) {
             state.products = products;
+        },
+        SET_PRODUCT(state, product) {
+            state.product = product;
         }
     },
     actions: {
@@ -44,11 +39,16 @@ const store = new Vuex.Store({
             return response;
         },
         async FETCH_PRODUCTS({ commit }) {
-            console.log('zzz')
             const response = await fetchProducts();
             commit('SET_PRODUCTS', response.data);
             return response;
         },
+        async FETCH_PRODUCT({ commit }, id) {
+            const response = await fetchProduct(id);
+            commit('SET_PRODUCT', response.data);
+            return response;
+        }
+
     },
     getters: {
         isAuthenticated(state) {
