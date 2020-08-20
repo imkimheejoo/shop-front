@@ -1,14 +1,10 @@
 <template>
-  <div>
-    <v-container class="mt-5">
-      <v-row class="justify-center">
-        <ProductInfo></ProductInfo>
-        <ProductDetail></ProductDetail>
-        <Review></Review>
-        <Question></Question>
-      </v-row>
-    </v-container>
-  </div>
+  <v-container class="mt-5">
+    <product-info></product-info>
+    <product-detail></product-detail>
+    <review></review>
+    <question></question>
+  </v-container>
 </template>
 
 <script>
@@ -23,7 +19,7 @@ export default {
     ProductInfo,
     ProductDetail,
     Question,
-    Review
+    Review,
   },
 };
 </script>
