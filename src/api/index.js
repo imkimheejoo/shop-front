@@ -26,7 +26,6 @@ const request = {
         try {
             return axios.post(`${domain + path}`, data);
         } catch (error) {
-            console.log('zz')
             alert(error);
         }
     },
