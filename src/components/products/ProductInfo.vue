@@ -5,6 +5,7 @@
             <v-list-item-content>
                 <v-list-item-title class="mb-1">{{product.title}}</v-list-item-title>
                 <v-list-item-subtitle>{{convertOptions(extractOptionNames(product.options))}}</v-list-item-subtitle>
+                <v-list-item-subtitle>{{product.description}}</v-list-item-subtitle>
                 <v-list-item-subtitle class="black--text text--darken-5">{{product.price}} 원</v-list-item-subtitle>
             </v-list-item-content>
             <v-form ref="form">
@@ -29,13 +30,12 @@
                 <v-btn class="mr-4" color="teal accent-4" dark @click="submit">submit</v-btn>
             </v-form>
         </v-row>
-        <div>{{product.content}}</div>
     </div>
 </template>
 
 <script>
     import {mapState} from 'vuex';
-    import {convertOptions} from '../util/util.js'
+    import {convertOptions} from '../../util/util.js'
 
     export default {
         data: () => ({
