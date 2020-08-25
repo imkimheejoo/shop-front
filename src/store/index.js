@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { account, setAuthInHeader } from '../api'
-import { fetchProducts, fetchProduct } from '../api/index'
+import { fetchProducts, fetchProduct, fetchReviews } from '../api/index'
 
 Vue.use(Vuex);
 
@@ -10,7 +10,8 @@ const store = new Vuex.Store({
         account: {},
         accessToken: null,
         products: {},
-        product:{}
+        product:{},
+        reviews: {}
     },
     mutations: {
         LOGIN(state, { accessToken }) {
@@ -30,6 +31,9 @@ const store = new Vuex.Store({
         },
         SET_PRODUCT(state, product) {
             state.product = product;
+        },
+        SET_REVIEWS(state, reviews) {
+            state.reviews = reviews;
         }
     },
     actions: {
@@ -46,6 +50,11 @@ const store = new Vuex.Store({
         async FETCH_PRODUCT({ commit }, id) {
             const response = await fetchProduct(id);
             commit('SET_PRODUCT', response.data);
+            return response;
+        },
+        async FETCH_REVIEWS({commit}, productId) {
+            const response = await fetchReviews(productId);
+            commit('SET_REVIEWS', response.data);
             return response;
         }
 

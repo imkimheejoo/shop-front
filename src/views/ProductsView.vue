@@ -21,6 +21,9 @@ export default {
     Question,
     Review,
   },
+  created() {
+    this.$store.dispatch("FETCH_REVIEWS", this.$route.params.id);
+  },
 };
 </script>
 

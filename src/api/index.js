@@ -64,13 +64,23 @@ function fetchProducts() {
 function fetchProduct(productId) {
     try {
         console.log(productId, "번 상품 가져옴");
-        return axios.get(`/api/products/1`);
+        return axios.get(`/api/products/1`); //todo
     } catch (error) {
+        window.alert(error);
+    }
+}
+
+function fetchReviews(productId) {
+    try {
+        console.log(productId +"의 리뷰들");
+        return axios.get(`/api/reviews/product/1`); //todo
+    } catch(error) {
         window.alert(error);
     }
 }
 
 export {
     fetchProducts,
-    fetchProduct
+    fetchProduct,
+    fetchReviews
 }
