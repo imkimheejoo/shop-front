@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { account, setAuthInHeader } from '../api'
-import { fetchProducts, fetchProduct, fetchReviews, fetchReview} from '../api/index'
+import { fetchProducts, fetchProduct, fetchReviews, fetchReview, fetchQnas, fetchQna} from '../api/index'
 
 Vue.use(Vuex);
 
@@ -12,7 +12,9 @@ const store = new Vuex.Store({
         products: {},
         product:{},
         reviews: {},
-        review:{}
+        review:{},
+        qnas:{},
+        qna:{}
     },
     mutations: {
         LOGIN(state, { accessToken }) {
@@ -38,6 +40,12 @@ const store = new Vuex.Store({
         },
         SET_REVIEW(state, review) {
             state.review = review;
+        },
+        SET_QNAS(state, qnas) {
+            state.qnas = qnas;
+        },
+        SET_QNA(state, qna) {
+            state.qna = qna;
         }
     },
     actions: {
@@ -64,6 +72,16 @@ const store = new Vuex.Store({
         async FETCH_REVIEW({commit}, reviewId) {
             const response = await fetchReview(reviewId);
             commit('SET_REVIEW', response.data);
+            return response;
+        },
+        async FETCH_QNAS({commit}, productId) {
+            const response = await fetchQnas(productId);
+            commit('SET_QNAS', response.data);
+            return response;
+        },
+        async FETCH_QNA({commit}, questionId) {
+            const response = await fetchQna(questionId);
+            commit('SET_QNA', response.data);
             return response;
         }
 

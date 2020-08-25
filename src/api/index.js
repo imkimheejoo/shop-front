@@ -86,9 +86,28 @@ function fetchReview(reviewId) {
     }
 }
 
+
+function fetchQnas(payload) {
+    try {
+        return axios.get(`/api/questions/product/${payload.productId}?page=${payload.page -1}&size=${payload.size}`);
+    } catch (error) {
+        window.alert(error);
+    }
+}
+
+function fetchQna(questionId) {
+    try {
+        return axios.get(`/api/questions/${questionId}`);
+    } catch (error) {
+        window.alert(error);
+    }
+}
+
 export {
     fetchProducts,
     fetchProduct,
     fetchReviews,
-    fetchReview
+    fetchReview,
+    fetchQnas,
+    fetchQna
 }

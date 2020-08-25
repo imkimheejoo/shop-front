@@ -56,7 +56,6 @@ export default {
   data() {
     return {
       dialog: false,
-      selectedReview: null,
       page: 1,
       size: 5,
     };
