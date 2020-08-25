@@ -24,14 +24,9 @@
         </v-card-title>
         <v-card-text>
           <h3>{{this.review.title}}</h3>
-          <p v-if="this.review.products" class="mb-2">구매 상품  [{{showOrderProduct()}}]</p>
+          <p v-if="this.review.products" class="mb-2">구매 상품 [{{showOrderProduct()}}]</p>
           <div v-if="this.review.imageUrl">
-            <v-img
-              ref="imageUrl"
-              :src="this.review.imageUrl"
-              height="400px"
-              width="550px"
-            ></v-img>
+            <v-img ref="imageUrl" :src="this.review.imageUrl" height="400px" width="550px"></v-img>
           </div>
           {{this.review.content}}
         </v-card-text>
@@ -77,12 +72,19 @@ export default {
     ...mapActions(["FETCH_REVIEW", "FETCH_REVIEWS"]),
 
     show(reviewId) {
-      this.dialog = !this.dialog;
-      this.FETCH_REVIEW(reviewId);
+      this.FETCH_REVIEW(reviewId)
+        .then(() => {
+          this.dialog = !this.dialog;
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
     },
     showOrderProduct() {
-      return this.review.products.name + "/" + this.review.products.options.join();
-    }
+      return (
+        this.review.products.name + "/" + this.review.products.options.join()
+      );
+    },
   },
 };
 </script>

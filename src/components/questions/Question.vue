@@ -77,8 +77,13 @@ export default {
     ...mapActions(["FETCH_QNA", "FETCH_QNAS"]),
 
     show(questionId) {
-      this.dialog = !this.dialog;
-      this.FETCH_QNA(questionId);
+      this.FETCH_QNA(questionId)
+        .then(() => {
+          this.dialog = !this.dialog;
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
     },
   },
 };
