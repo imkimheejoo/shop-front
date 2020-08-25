@@ -1,7 +1,7 @@
 <template>
-<v-row class="ma-5 pa-5" style="witdh:1920px; height:1080px; background-color: #008080;">
-    <div >{{product.content}}</div>
-</v-row>
+    <v-row class="ma-5 pa-5" style="witdh:1920px; height:1080px; background-color: #E6E6E6;">
+        <div >{{product.content}}</div>
+    </v-row>
 </template>
 
 <script>
