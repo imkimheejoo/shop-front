@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { account, setAuthInHeader } from '../api'
-import { fetchProducts, fetchProduct, fetchReviews, fetchReview, fetchQnas, fetchQna} from '../api/index'
+import { fetchProducts, fetchProduct, fetchReviews, fetchReview, fetchQnas, fetchQna, addReview, fetchOrderLog} from '../api/index'
 
 Vue.use(Vuex);
 
@@ -82,6 +82,14 @@ const store = new Vuex.Store({
         async FETCH_QNA({commit}, questionId) {
             const response = await fetchQna(questionId);
             commit('SET_QNA', response.data);
+            return response;
+        },
+        async ADD_REVIEW(payload) {
+            const response = await addReview(payload);
+            return response;
+        },
+        async FETCH_ORDERLOG(payload) {
+            const response = await fetchOrderLog(payload);
             return response;
         }
 

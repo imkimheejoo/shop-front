@@ -72,7 +72,7 @@ function fetchProduct(productId) {
 
 function fetchReviews(payload) {
     try {
-        return axios.get(`/api/reviews/product/${payload.productId}?page=${payload.page -1}&size=${payload.size}`);
+        return axios.get(`/api/reviews/product/${payload.productId}?page=${payload.page - 1}&size=${payload.size}`);
     } catch (error) {
         window.alert(error);
     }
@@ -89,7 +89,7 @@ function fetchReview(reviewId) {
 
 function fetchQnas(payload) {
     try {
-        return axios.get(`/api/questions/product/${payload.productId}?page=${payload.page -1}&size=${payload.size}`);
+        return axios.get(`/api/questions/product/${payload.productId}?page=${payload.page - 1}&size=${payload.size}`);
     } catch (error) {
         window.alert(error);
     }
@@ -99,7 +99,23 @@ function fetchQna(questionId) {
     try {
         return axios.get(`/api/questions/${questionId}`);
     } catch (error) {
-        window.alert(error);
+        alert(error);
+    }
+}
+
+function addReview(payload) {
+    try {
+        return axios.post(`/api/reviews`, payload);
+    } catch (error) {
+        alert(error);
+    }
+}
+
+function fetchOrderLog(payload) {
+    try {
+        return axios.get(`/api/orders/state/product`, payload);
+    } catch (error) {
+        alert(error);
     }
 }
 
@@ -109,5 +125,7 @@ export {
     fetchReviews,
     fetchReview,
     fetchQnas,
-    fetchQna
+    fetchQna,
+    addReview,
+    fetchOrderLog
 }
