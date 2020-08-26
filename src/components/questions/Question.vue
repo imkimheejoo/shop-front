@@ -2,7 +2,7 @@
   <div class="ma-5">
     <h2>Q&A</h2>
     <v-col class="text-right">
-      <v-btn color="primary" @click="formDialog = true">문의하기</v-btn>
+      <v-btn color="teal accent-4" dark @click="formDialog = true">문의하기</v-btn>
     </v-col>
     <div v-for="q of this.qnas.contents" :key="q.id">
       <v-row class="ma-5">
@@ -45,12 +45,6 @@
       </v-card>
     </v-dialog>
 
-    <v-row>
-      <v-col class="text-center mt-5">
-        <v-pagination v-model="page" :length="qnas.totalPages" total-visible="7"></v-pagination>
-      </v-col>
-    </v-row>
-
     <v-row justify="center">
       <v-dialog v-model="formDialog" persistent max-width="600px">
         <v-card>
@@ -85,6 +79,17 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
+    </v-row>
+
+    <v-row>
+      <v-col class="text-center mt-5">
+        <v-pagination
+          color="teal accent-4"
+          v-model="page"
+          :length="qnas.totalPages"
+          total-visible="7"
+        ></v-pagination>
+      </v-col>
     </v-row>
   </div>
 </template>
@@ -157,11 +162,9 @@ export default {
         });
     },
 
-     clearReviewForm() {
-      this.inputTitle = '',
-      this.inputContent = '',
-      this.inputImage = {}
-    }
+    clearReviewForm() {
+      (this.inputTitle = ""), (this.inputContent = ""), (this.inputImage = {});
+    },
   },
 };
 </script>

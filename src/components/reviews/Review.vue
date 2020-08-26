@@ -2,7 +2,7 @@
   <div class="ma-5">
     <h2>Review</h2>
     <v-col class="text-right">
-      <v-btn color="primary" @click="openReviewForm()">리뷰 추가하기</v-btn>
+      <v-btn color="teal accent-4" dark @click="showReviewForm()">리뷰 추가하기</v-btn>
     </v-col>
     <div v-for="r of this.reviews.contents" :key="r.id">
       <v-row class="ma-5">
@@ -77,7 +77,12 @@
 
     <v-row>
       <v-col class="text-center mt-5">
-        <v-pagination v-model="page" :length="reviews.totalPages" total-visible="7"></v-pagination>
+        <v-pagination
+          color="teal accent-4"
+          v-model="page"
+          :length="reviews.totalPages"
+          total-visible="7"
+        ></v-pagination>
       </v-col>
     </v-row>
   </div>
@@ -129,7 +134,7 @@ export default {
         });
     },
 
-    openReviewForm() {
+    showReviewForm() {
       if (this.$store.state.account) {
         if (this.isOrdered === true) {
           this.formDialog = !this.formDialog;
@@ -165,11 +170,16 @@ export default {
     addReview() {
       if (this.validate()) {
         const { inputTitle, inputContent, inputImage } = this;
-        this.ADD_REVIEW({ inputTitle, inputContent, inputImage, productId: this.$route.params.id})
+        this.ADD_REVIEW({
+          inputTitle,
+          inputContent,
+          inputImage,
+          productId: this.$route.params.id,
+        })
           .then(() => {
             alert("리뷰를 등록해주셔서 감사합니다!");
             this.formDialog = !this.formDialog;
-          
+
             this.clearReviewForm();
 
             const { size } = this;
@@ -189,10 +199,8 @@ export default {
     },
 
     clearReviewForm() {
-      this.inputTitle = '',
-      this.inputContent = '',
-      this.inputImage = {}
-    }
+      (this.inputTitle = ""), (this.inputContent = ""), (this.inputImage = {});
+    },
   },
 };
 </script>
