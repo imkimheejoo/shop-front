@@ -142,22 +142,26 @@ export default {
             "문의가 완료되었습니다! 최소 답변은 1-2일정도 소요될 예정입니다."
           );
           this.formDialog = !this.formDialog;
-
-
-          const { page, size } = this;
+          this.clearReviewForm();
+          const { size } = this;
           this.FETCH_QNAS({
-            page,
+            page: 1,
             size,
             productId: this.$route.params.id,
+          }).then((response) => {
+            this.page = response.data.pageable.pageNumber;
           });
-        }).then((response) => {
-            console.log(response);
-        //    this.page = response.pageable.page.pageNumber;
         })
         .catch((error) => {
           alert(error.message);
         });
     },
+
+     clearReviewForm() {
+      this.inputTitle = '',
+      this.inputContent = '',
+      this.inputImage = {}
+    }
   },
 };
 </script>
