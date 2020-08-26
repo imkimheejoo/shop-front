@@ -1,0 +1,56 @@
+{
+    "contents": [
+        {
+            "id": 1,
+            "title": "문의1",
+            "author": "김문의",
+            "questionDate": "2020-08-25"
+        },
+        {
+            "id": 2,
+            "title": "문의2",
+            "author": "김문의",
+            "questionDate": "2020-08-24"
+        }, {
+            "id": 3,
+            "title": "문의3",
+            "author": "김문의",
+            "questionDate": "2020-08-23"
+        }, {
+            "id": 4,
+            "title": "문의4",
+            "author": "김문의",
+            "questionDate": "2020-08-22"
+        }, {
+            "id": 5,
+            "title": "문의5",
+            "author": "김문의",
+            "questionDate": "2020-08-21"
+        }
+    ],
+    "pageable": {
+        "sort": {
+            "sorted": false,
+            "unsorted": true,
+            "empty": true
+        },
+        "offset": 0,
+        "pageNumber": 3,
+        "pageSize": 12,
+        "paged": true,
+        "unpaged": false
+    },
+    "last": false,
+    "totalPages": 10,
+    "totalElements": 120,
+    "size": 12,
+    "number": 0,
+    "first": true,
+    "numberOfElements": 10,
+    "sort": {
+        "sorted": false,
+        "unsorted": true,
+        "empty": true
+    },
+    "empty": false
+}
