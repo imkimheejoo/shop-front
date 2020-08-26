@@ -119,6 +119,14 @@ function fetchOrderLog(payload) {
     }
 }
 
+function addQuestion(payload) {
+    try {
+        return axios.post(`/api/questions`, payload);
+    } catch (error) {
+        alert(error);
+    }
+}
+
 export {
     fetchProducts,
     fetchProduct,
@@ -127,5 +135,6 @@ export {
     fetchQnas,
     fetchQna,
     addReview,
-    fetchOrderLog
+    fetchOrderLog,
+    addQuestion
 }

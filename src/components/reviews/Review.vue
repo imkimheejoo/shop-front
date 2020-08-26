@@ -165,16 +165,20 @@ export default {
     addReview() {
       if (this.validate()) {
         const { inputTitle, inputContent, inputImage } = this;
-        this.ADD_REVIEW({ inputTitle, inputContent, inputImage })
+        this.ADD_REVIEW({ inputTitle, inputContent, inputImage, productId: this.$route.params.id})
           .then(() => {
             alert("리뷰를 등록해주셔서 감사합니다!");
             this.formDialog = !this.formDialog;
-            
+          
+            this.clearReviewForm();
+
             const { size } = this;
             this.FETCH_REVIEWS({
               page: 1,
               size,
               productId: this.$route.params.id,
+            }).then((response) => {
+              this.page = response.data.pageable.pageNumber;
             });
           })
           .catch((error) => {
@@ -183,6 +187,12 @@ export default {
           });
       }
     },
+
+    clearReviewForm() {
+      this.inputTitle = '',
+      this.inputContent = '',
+      this.inputImage = {}
+    }
   },
 };
 </script>

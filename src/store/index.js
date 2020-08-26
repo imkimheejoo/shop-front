@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { account, setAuthInHeader } from '../api'
-import { fetchProducts, fetchProduct, fetchReviews, fetchReview, fetchQnas, fetchQna, addReview, fetchOrderLog} from '../api/index'
+import { fetchProducts, fetchProduct, fetchReviews, fetchReview, fetchQnas, fetchQna, addReview, fetchOrderLog, addQuestion} from '../api/index'
 
 Vue.use(Vuex);
 
@@ -90,6 +90,10 @@ const store = new Vuex.Store({
         },
         async FETCH_ORDERLOG(payload) {
             const response = await fetchOrderLog(payload);
+            return response;
+        },
+        async ADD_QUESTION(payload) {
+            const response = await addQuestion(payload);
             return response;
         }
 

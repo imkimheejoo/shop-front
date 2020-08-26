@@ -1,6 +1,9 @@
 <template>
   <div class="ma-5">
     <h2>Q&A</h2>
+    <v-col class="text-right">
+      <v-btn color="primary" @click="formDialog = true">문의하기</v-btn>
+    </v-col>
     <div v-for="q of this.qnas.contents" :key="q.id">
       <v-row class="ma-5">
         <v-col cols="1" class="pa-0 ma-0"></v-col>
@@ -47,6 +50,42 @@
         <v-pagination v-model="page" :length="qnas.totalPages" total-visible="7"></v-pagination>
       </v-col>
     </v-row>
+
+    <v-row justify="center">
+      <v-dialog v-model="formDialog" persistent max-width="600px">
+        <v-card>
+          <v-card-title>
+            <span class="headline">문의내역</span>
+          </v-card-title>
+          <v-card-text>
+            <v-form ref="form">
+              <v-row>
+                <v-text-field
+                  v-model="inputTitle"
+                  label="문의 제목"
+                  :rules="[v => !!v || '제목은 필수입력사항입니다.']"
+                ></v-text-field>
+              </v-row>
+              <v-row>
+                <v-text-field
+                  v-model="inputContent"
+                  label="문의내용"
+                  :rules="[v => !!v || '내용은 필수입력사항입니다.']"
+                ></v-text-field>
+              </v-row>
+              <v-row>
+                <v-file-input v-model="inputImage" label="image"></v-file-input>
+              </v-row>
+            </v-form>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" text @click="formDialog = false">Close</v-btn>
+            <v-btn color="blue darken-1" text @click="addQuestion()">Save</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-row>
   </div>
 </template>
 
@@ -58,6 +97,10 @@ export default {
       dialog: false,
       page: 1,
       size: 5,
+      formDialog: false,
+      inputTitle: "",
+      inputContent: "",
+      inputImage: {},
     };
   },
   created() {
@@ -74,12 +117,42 @@ export default {
     ...mapState(["qnas", "qna"]),
   },
   methods: {
-    ...mapActions(["FETCH_QNA", "FETCH_QNAS"]),
+    ...mapActions(["FETCH_QNA", "FETCH_QNAS", "ADD_QUESTION"]),
 
     show(questionId) {
       this.FETCH_QNA(questionId)
         .then(() => {
           this.dialog = !this.dialog;
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    },
+
+    addQuestion() {
+      const { inputTitle, inputContent, inputImage } = this;
+      this.ADD_QUESTION({
+        inputTitle,
+        inputContent,
+        inputImage,
+        productId: this.$route.params.id,
+      })
+        .then(() => {
+          alert(
+            "문의가 완료되었습니다! 최소 답변은 1-2일정도 소요될 예정입니다."
+          );
+          this.formDialog = !this.formDialog;
+
+
+          const { page, size } = this;
+          this.FETCH_QNAS({
+            page,
+            size,
+            productId: this.$route.params.id,
+          });
+        }).then((response) => {
+            console.log(response);
+        //    this.page = response.pageable.page.pageNumber;
         })
         .catch((error) => {
           alert(error.message);
