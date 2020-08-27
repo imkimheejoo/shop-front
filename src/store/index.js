@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { account, setAuthInHeader } from '../api'
-import { fetchProducts, fetchProduct, fetchReviews, fetchReview, fetchQnas, fetchQna, addReview, fetchOrderLog, addQuestion,fetchAccountCarts} from '../api/index'
+import { fetchProducts, fetchProduct, fetchReviews, fetchReview, fetchQnas, fetchQna, addReview, fetchOrderLog, addQuestion, fetchAccountCarts, deleteCartItem } from '../api/index'
 
 Vue.use(Vuex);
 
@@ -10,12 +10,12 @@ const store = new Vuex.Store({
         account: {},
         accessToken: null,
         products: {},
-        product:{},
+        product: {},
         reviews: {},
-        review:{},
-        qnas:{},
-        qna:{},
-        carts:{}
+        review: {},
+        qnas: {},
+        qna: {},
+        carts: {}
     },
     mutations: {
         LOGIN(state, { accessToken }) {
@@ -68,22 +68,22 @@ const store = new Vuex.Store({
             commit('SET_PRODUCT', response.data);
             return response;
         },
-        async FETCH_REVIEWS({commit}, payload) {
+        async FETCH_REVIEWS({ commit }, payload) {
             const response = await fetchReviews(payload);
             commit('SET_REVIEWS', response.data);
             return response;
         },
-        async FETCH_REVIEW({commit}, reviewId) {
+        async FETCH_REVIEW({ commit }, reviewId) {
             const response = await fetchReview(reviewId);
             commit('SET_REVIEW', response.data);
             return response;
         },
-        async FETCH_QNAS({commit}, productId) {
+        async FETCH_QNAS({ commit }, productId) {
             const response = await fetchQnas(productId);
             commit('SET_QNAS', response.data);
             return response;
         },
-        async FETCH_QNA({commit}, questionId) {
+        async FETCH_QNA({ commit }, questionId) {
             const response = await fetchQna(questionId);
             commit('SET_QNA', response.data);
             return response;
@@ -100,9 +100,14 @@ const store = new Vuex.Store({
             const response = await addQuestion(payload);
             return response;
         },
-        async FETCH_ACCOUNT_CARTS({commit}, payload) {
+        async FETCH_ACCOUNT_CARTS({ commit }, payload) {
             const response = await fetchAccountCarts(payload);
             commit('SET_CARTS', response.data);
+            return response;
+        },
+        async DELETE_CART_ITEM({commit} ,cartId) {
+            console.log(commit);    //todo : commit 지우기
+            const response = await deleteCartItem(cartId);
             return response;
         }
 

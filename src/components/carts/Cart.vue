@@ -48,21 +48,24 @@ export default {
   created() {
     const { page, size } = this;
     this.FETCH_ACCOUNT_CARTS({ page, size });
-
-    console.log(this.carts);
   },
   computed: {
     ...mapState(["carts"]),
   },
   methods: {
-    ...mapActions(["FETCH_ACCOUNT_CARTS"]),
+    ...mapActions(["FETCH_ACCOUNT_CARTS", "DELETE_CART_ITEM"]),
 
     deleteCartItem(id) {
-      // this.DELETE_CART_ITEM({id})
-      // .then(() => {
-      //     this.
-      // })
-      console.log(id, "deleteCartItem");
+      this.DELETE_CART_ITEM(id)
+        .then(() => {
+          const { page, size } = this;
+          this.FETCH_ACCOUNT_CARTS({ page, size }).then(() => {
+            alert("삭제가 완료되었습니다.");
+          });
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
     },
   },
 };

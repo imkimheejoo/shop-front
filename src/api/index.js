@@ -129,7 +129,15 @@ function addQuestion(payload) {
 
 function fetchAccountCarts(payload) {
     try {
-        return axios.get(`/api/carts?page=${payload.page-1}&size=${payload.size}`)
+        return axios.get(`/api/carts?page=${payload.page-1}&size=${payload.size}`);
+    } catch (error) {
+        alert(error);
+    }
+}
+
+function deleteCartItem(cartId) {
+    try {
+        return axios.delete(`/api/carts/${cartId}`);
     } catch (error) {
         alert(error);
     }
@@ -145,5 +153,6 @@ export {
     addReview,
     fetchOrderLog,
     addQuestion,
-    fetchAccountCarts
+    fetchAccountCarts,
+    deleteCartItem
 }
