@@ -1,15 +1,20 @@
 <template>
-    <div>
-        CartView
-    </div>
+  <v-container class="mt-5">
+   <cart></cart>
+  </v-container>
 </template>
 
 <script>
-    export default {
-        name: "CartView"
-    }
+import Cart from '../components/carts/Cart'
+export default {
+  name: "CartView",
+  data: () => ({
+  }),
+  components :{
+      Cart,
+  }
+};
 </script>
 
 <style scoped>
-
 </style>

@@ -127,6 +127,14 @@ function addQuestion(payload) {
     }
 }
 
+function fetchAccountCarts(payload) {
+    try {
+        return axios.get(`/api/carts?page=${payload.page-1}&size=${payload.size}`)
+    } catch (error) {
+        alert(error);
+    }
+}
+
 export {
     fetchProducts,
     fetchProduct,
@@ -136,5 +144,6 @@ export {
     fetchQna,
     addReview,
     fetchOrderLog,
-    addQuestion
+    addQuestion,
+    fetchAccountCarts
 }

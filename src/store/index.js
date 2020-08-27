@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { account, setAuthInHeader } from '../api'
-import { fetchProducts, fetchProduct, fetchReviews, fetchReview, fetchQnas, fetchQna, addReview, fetchOrderLog, addQuestion} from '../api/index'
+import { fetchProducts, fetchProduct, fetchReviews, fetchReview, fetchQnas, fetchQna, addReview, fetchOrderLog, addQuestion,fetchAccountCarts} from '../api/index'
 
 Vue.use(Vuex);
 
@@ -14,7 +14,8 @@ const store = new Vuex.Store({
         reviews: {},
         review:{},
         qnas:{},
-        qna:{}
+        qna:{},
+        carts:{}
     },
     mutations: {
         LOGIN(state, { accessToken }) {
@@ -46,6 +47,9 @@ const store = new Vuex.Store({
         },
         SET_QNA(state, qna) {
             state.qna = qna;
+        },
+        SET_CARTS(state, carts) {
+            state.carts = carts;
         }
     },
     actions: {
@@ -94,6 +98,11 @@ const store = new Vuex.Store({
         },
         async ADD_QUESTION(payload) {
             const response = await addQuestion(payload);
+            return response;
+        },
+        async FETCH_ACCOUNT_CARTS({commit}, payload) {
+            const response = await fetchAccountCarts(payload);
+            commit('SET_CARTS', response.data);
             return response;
         }
 
