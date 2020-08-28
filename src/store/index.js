@@ -100,8 +100,8 @@ const store = new Vuex.Store({
             const response = await addQuestion(payload);
             return response;
         },
-        async FETCH_ACCOUNT_CARTS({ commit }, payload) {
-            const response = await fetchAccountCarts(payload);
+        async FETCH_ACCOUNT_CARTS({ commit }) {
+            const response = await fetchAccountCarts();
             commit('SET_CARTS', response.data);
             return response;
         },

@@ -46,8 +46,7 @@ export default {
     };
   },
   created() {
-    const { page, size } = this;
-    this.FETCH_ACCOUNT_CARTS({ page, size });
+    this.FETCH_ACCOUNT_CARTS();
   },
   computed: {
     ...mapState(["carts"]),
@@ -58,8 +57,7 @@ export default {
     deleteCartItem(id) {
       this.DELETE_CART_ITEM(id)
         .then(() => {
-          const { page, size } = this;
-          this.FETCH_ACCOUNT_CARTS({ page, size }).then(() => {
+          this.FETCH_ACCOUNT_CARTS().then(() => {
             alert("삭제가 완료되었습니다.");
           });
         })

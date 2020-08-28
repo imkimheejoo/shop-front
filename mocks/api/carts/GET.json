@@ -65,30 +65,5 @@
             "imageUrl": "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
             "totalPrice": 30000
         }
-    ],
-    "pageable": {
-        "sort": {
-            "sorted": false,
-            "unsorted": true,
-            "empty": true
-        },
-        "offset": 0,
-        "pageNumber": 3,
-        "pageSize": 12,
-        "paged": true,
-        "unpaged": false
-    },
-    "last": false,
-    "totalPages": 5,
-    "totalElements": 120,
-    "size": 12,
-    "number": 0,
-    "first": true,
-    "numberOfElements": 10,
-    "sort": {
-        "sorted": false,
-        "unsorted": true,
-        "empty": true
-    },
-    "empty": false
+    ]
 }

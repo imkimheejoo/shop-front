@@ -127,9 +127,9 @@ function addQuestion(payload) {
     }
 }
 
-function fetchAccountCarts(payload) {
+function fetchAccountCarts() {
     try {
-        return axios.get(`/api/carts?page=${payload.page-1}&size=${payload.size}`);
+        return axios.get(`/api/carts`);
     } catch (error) {
         alert(error);
     }
