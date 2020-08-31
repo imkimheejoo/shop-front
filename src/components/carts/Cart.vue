@@ -1,36 +1,47 @@
 <template>
   <div>
-    <div v-for="c in this.carts.contents" :key="c.id">
-      <v-row class="pa-5">
-        <v-col cols="1" class="ma-0 pr-0 pl-5 text-center">
-          <v-checkbox></v-checkbox>
-        </v-col>
-        <v-col cols="1" class="ma-0 pa-0">
-          <v-img :src="c.imageUrl" height="100px" width="100px"></v-img>
-        </v-col>
-        <v-col class="pt-0">
-          <v-row>
-            <v-col cols="11">
-              <h4>
-                <router-link
-                  style="text-decoration:none;"
-                  :to="`/products/${c.productId}`"
-                >{{c.productName}}</router-link>
-              </h4>
-            </v-col>
-            <v-col cols="1">
-              <v-btn color="teal accent-4" dark @click="deleteCartItem(c.id)">삭제</v-btn>
-            </v-col>
-          </v-row>
+    <v-treeview>
+      <div v-for="c in this.carts.contents" :key="c.id">
+        <v-row class="pa-5">
+          <v-col cols="1" class="ma-0 pr-0 pl-5 text-center">
+            <v-checkbox
+              v-model="selected"
+              :value="c.id"
+            ></v-checkbox>
+          </v-col>
+          <v-col cols="1" class="ma-0 pa-0">
+            <v-img :src="c.imageUrl" height="100px" width="100px"></v-img>
+          </v-col>
+          <v-col class="pt-0">
+            <v-row>
+              <v-col cols="11">
+                <h4>
+                  <router-link
+                    style="text-decoration:none;"
+                    :to="`/products/${c.productId}`"
+                  >{{c.productName}}</router-link>
+                </h4>
+              </v-col>
+              <v-col cols="1">
+                <v-btn color="teal accent-4" dark @click="deleteCartItem(c.id)">삭제</v-btn>
+              </v-col>
+            </v-row>
 
-          <span
-            v-for="option in c.options"
-            :key="option.option"
-          >옵션: {{option.option}} / 수량: {{option.count}}</span>
-          <h4 class="text-right">{{c.totalPrice}}원</h4>
-        </v-col>
+            <span
+              v-for="option in c.options"
+              :key="option.option"
+            >옵션: {{option.option}} / 수량: {{option.count}}</span>
+            <h4 class="text-right">{{c.totalPrice}}원</h4>
+          </v-col>
+        </v-row>
+        <v-divider></v-divider>
+      </div>
+    </v-treeview>
+    <div>
+      <v-row>
+        <h4 class="pa-5">결제예정 금액</h4>
+        <h4 class="text-right">{{this.price}} 원</h4>
       </v-row>
-      <v-divider></v-divider>
     </div>
   </div>
 </template>
@@ -38,18 +49,30 @@
 <script>
 import { mapActions, mapState } from "vuex";
 export default {
-  name: "CartView",
+  name: "Cart",
   data() {
     return {
-      page: 1,
-      size: 5,
+      price: 0,
+      selected: [],
     };
   },
   created() {
-    this.FETCH_ACCOUNT_CARTS();
+    this.FETCH_ACCOUNT_CARTS().then(() => {
+      this.checked = new Array(this.carts.contents.length);
+      this.checked.fill(false);
+    });
   },
   computed: {
     ...mapState(["carts"]),
+  },
+  watch: {
+    selected() {
+        this.price = 0;
+        for (let i = 0; i < this.selected.length; i++) {
+            this.price += this.carts.contents[i].totalPrice;
+            
+        }
+    },
   },
   methods: {
     ...mapActions(["FETCH_ACCOUNT_CARTS", "DELETE_CART_ITEM"]),
@@ -62,7 +85,7 @@ export default {
           });
         })
         .catch((error) => {
-          console.log(error.message);
+          alert(error);
         });
     },
   },
