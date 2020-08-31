@@ -73,8 +73,8 @@ export default {
     selected() {
       this.price = this.carts.contents
         .filter((i) => this.selected.includes(i.id))
-        .map(i => i.totalPrice)
-        .reduce((a, b) => a + b);
+        .map((i) => i.totalPrice)
+        .reduce((a, b) => a + b, 0);
     },
   },
   methods: {
@@ -85,11 +85,21 @@ export default {
         .then(() => {
           this.FETCH_ACCOUNT_CARTS().then(() => {
             alert("삭제가 완료되었습니다.");
+            this.deleteSelectedItem(id);
           });
         })
         .catch((error) => {
           alert(error);
         });
+    },
+
+    deleteSelectedItem(id) {
+      for (let i = 0; this.selected.length; i++) {
+        if (this.selected[i] === id) {
+          this.selected.splice(i, 1);
+          break;
+        }
+      }
     },
   },
 };
