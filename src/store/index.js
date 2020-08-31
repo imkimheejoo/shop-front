@@ -1,7 +1,9 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { account, setAuthInHeader } from '../api'
-import { fetchProducts, fetchProduct, fetchReviews, fetchReview, fetchQnas, fetchQna, addReview, fetchOrderLog, addQuestion, fetchAccountCarts, deleteCartItem } from '../api/index'
+import { fetchProducts, fetchProduct, fetchReviews, fetchReview, 
+    fetchQnas, fetchQna, addReview, fetchOrderLog, 
+    addQuestion, fetchAccountCarts, deleteCartItem, addOrderItems } from '../api/index'
 
 Vue.use(Vuex);
 
@@ -108,6 +110,10 @@ const store = new Vuex.Store({
         async DELETE_CART_ITEM({commit} ,cartId) {
             console.log(commit);    //todo : commit 지우기
             const response = await deleteCartItem(cartId);
+            return response;
+        },
+        async ADD_ORDER_ITEMS(payload) {
+            const response = await addOrderItems(payload);
             return response;
         }
 

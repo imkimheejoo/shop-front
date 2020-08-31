@@ -43,7 +43,7 @@
           <h2 class="text-right pa-5">{{this.price}} 원</h2>
         </v-col>
       </v-row>
-      <v-btn block color="teal accent-4" dark class="mb-5">
+      <v-btn block color="teal accent-4" dark class="mb-5" @click="prepareOrderWithItems">
         <h3>구매하기</h3>
       </v-btn>
     </div>
@@ -78,7 +78,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["FETCH_ACCOUNT_CARTS", "DELETE_CART_ITEM"]),
+    ...mapActions(["FETCH_ACCOUNT_CARTS", "DELETE_CART_ITEM", "ADD_ORDER_ITEMS"]),
 
     deleteCartItem(id) {
       this.DELETE_CART_ITEM(id)
@@ -101,6 +101,15 @@ export default {
         }
       }
     },
+
+    prepareOrderWithItems() {
+        this.ADD_ORDER_ITEMS({cartItems : this.selected})
+        .then(() => {
+            this.$router.push('/order');
+        }).catch(error => {
+            alert(error);
+        })
+    }
   },
 };
 </script>

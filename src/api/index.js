@@ -143,6 +143,14 @@ function deleteCartItem(cartId) {
     }
 }
 
+function addOrderItems(payload) {
+    try {
+        return axios.post(`/api/orders/items`, payload);
+    } catch (error) {
+        alert(error);
+    }
+}
+
 export {
     fetchProducts,
     fetchProduct,
@@ -154,5 +162,6 @@ export {
     fetchOrderLog,
     addQuestion,
     fetchAccountCarts,
-    deleteCartItem
+    deleteCartItem,
+    addOrderItems
 }
