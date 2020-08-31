@@ -19,6 +19,7 @@ module.exports = {
       app.use(apiMocker("/api/carts", "mocks/api/carts"));
       app.use(apiMocker("/api/carts/1", "mocks/api/carts/1"));
       app.use(apiMocker("/api/orders/items", "mocks/api/orders/items"));
+      app.use(apiMocker("/api/products/search", "mocks/api/products/search"));
     },
   },
 }
