@@ -78,10 +78,14 @@ export default {
     },
   },
   methods: {
-    ...mapActions(["FETCH_ACCOUNT_CARTS", "DELETE_CART_ITEM", "ADD_ORDER_ITEMS"]),
+    ...mapActions([
+      "FETCH_ACCOUNT_CARTS",
+      "DELETE_CART_ITEM",
+      "ADD_ORDER_ITEMS",
+    ]),
 
     deleteCartItem(id) {
-      this.DELETE_CART_ITEM(id)
+      this.DELETE_CART_ITEM({ cartId: id })
         .then(() => {
           this.FETCH_ACCOUNT_CARTS().then(() => {
             alert("삭제가 완료되었습니다.");
@@ -103,13 +107,14 @@ export default {
     },
 
     prepareOrderWithItems() {
-        this.ADD_ORDER_ITEMS({cartItems : this.selected})
+      this.ADD_ORDER_ITEMS({ cartItems: this.selected })
         .then(() => {
-            this.$router.push('/order');
-        }).catch(error => {
-            alert(error);
+          this.$router.push("/order");
         })
-    }
+        .catch((error) => {
+          alert(error);
+        });
+    },
   },
 };
 </script>

@@ -16,19 +16,6 @@ const requireAuth = () => (from, to, next) => {
         next(`/login?returnPath=${encodeURIComponent(from.path)}`)
 };
 
-// const requireAuth2 = () => (from, to, next, nextFunction) => {
-//     if (store.state.accessToken) {
-//         nextFunction()
-//             .then(() => {
-//                 next();
-//             }).catch(error => {
-//                 console.log(error);
-//             })
-//     } else {
-//         next(`/login?returnPath=${encodeURIComponent(from.path)}`);
-//     }
-// };
-
 export const router = new VueRouter({
     mode: 'history',
 

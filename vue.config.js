@@ -5,6 +5,7 @@ module.exports = {
     "vuetify"
   ],
   devServer: {
+    // eslint-disable-next-line no-unused-vars
     before: (app, server, compiler) => {
       app.use(apiMocker("/api/products", "mocks/api/products"));
       app.use(apiMocker("/api/products/1", "mocks/api/products/1"));

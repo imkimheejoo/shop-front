@@ -1,9 +1,11 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { account, setAuthInHeader } from '../api'
-import { fetchProducts, fetchProduct, fetchReviews, fetchReview, 
-    fetchQnas, fetchQna, addReview, fetchOrderLog, 
-    addQuestion, fetchAccountCarts, deleteCartItem, addOrderItems } from '../api/index'
+import {
+    fetchProducts, fetchProduct, fetchReviews, fetchReview,
+    fetchQnas, fetchQna, addReview, fetchOrderLog,
+    addQuestion, fetchAccountCarts, deleteCartItem, addOrderItems
+} from '../api/index'
 
 Vue.use(Vuex);
 
@@ -90,15 +92,15 @@ const store = new Vuex.Store({
             commit('SET_QNA', response.data);
             return response;
         },
-        async ADD_REVIEW(payload) {
+        async ADD_REVIEW(_, payload) {
             const response = await addReview(payload);
             return response;
         },
-        async FETCH_ORDERLOG(payload) {
+        async FETCH_ORDERLOG(_, payload) {
             const response = await fetchOrderLog(payload);
             return response;
         },
-        async ADD_QUESTION(payload) {
+        async ADD_QUESTION(_, payload) {
             const response = await addQuestion(payload);
             return response;
         },
@@ -107,12 +109,11 @@ const store = new Vuex.Store({
             commit('SET_CARTS', response.data);
             return response;
         },
-        async DELETE_CART_ITEM({commit} ,cartId) {
-            console.log(commit);    //todo : commit 지우기
-            const response = await deleteCartItem(cartId);
+        async DELETE_CART_ITEM(_, payload) {
+            const response = await deleteCartItem(payload.cartId);
             return response;
         },
-        async ADD_ORDER_ITEMS(payload) {
+        async ADD_ORDER_ITEMS(_,payload) {
             const response = await addOrderItems(payload);
             return response;
         }

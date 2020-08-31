@@ -1,15 +1,10 @@
 <template>
-  <div>
-      sss
-  </div>
+  <div>sss</div>
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style>
-
 </style>
