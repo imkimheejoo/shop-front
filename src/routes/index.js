@@ -46,12 +46,14 @@ export const router = new VueRouter({
             name: 'login',
             component: LoginView,
         },
+
         {
             path: '/cart',
             name: 'cart',
             component: CartView,
             beforeEnter: requireAuth()
         },
+
         {
             path: '/products/:id',
             name: 'products',
@@ -65,11 +67,25 @@ export const router = new VueRouter({
                     })
             }
         },
+
+        {
+            path: '/products/search/:search',
+            name: 'productsByKeyword',
+            component: IndexView,
+            beforeEnter: (to, from, next) => {
+                store.dispatch('FETCH_PRODUCTS_BY_SEARCH_KEYWORD', ({ keyword: to.params.search }))
+                    .then(() => {
+                        next()
+                    }).catch(error => {
+                        alert(error);
+                    })
+            }
+        },
         {
             path: '/order',
             name: 'orderPage',
             component: OrderView,
-            beforeEnter : requireAuth()
+            beforeEnter: requireAuth()
         }
     ]
 

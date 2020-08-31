@@ -1,0 +1,69 @@
+{
+    "contents": [
+        {
+            "id": 1,
+            "title": "사앙품1",
+            "price": "10000",
+            "options": [
+                "ivory",
+                "black"
+            ],
+            "thumbnailUrl": "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+        },
+        {
+            "id": 2,
+            "title": "사앙품2",
+            "price": "20000",
+            "options": [
+                "ivory",
+                "black"
+            ],
+            "thumbnailUrl": "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+        },
+        {
+            "id": 6,
+            "title": "사앙품6",
+            "price": "30000",
+            "options": [
+                "ivory",
+                "black"
+            ],
+            "thumbnailUrl": "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+        },
+        {
+            "id": 10,
+            "title": "사앙품10",
+            "price": "40000",
+            "options": [
+                "ivory",
+                "black"
+            ],
+            "thumbnailUrl": "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+        }
+    ],
+    "pageable": {
+        "sort": {
+            "sorted": false,
+            "unsorted": true,
+            "empty": true
+        },
+        "offset": 0,
+        "pageNumber": 3,
+        "pageSize": 12,
+        "paged": true,
+        "unpaged": false
+    },
+    "last": false,
+    "totalPages": 10,
+    "totalElements": 120,
+    "size": 12,
+    "number": 0,
+    "first": true,
+    "numberOfElements": 10,
+    "sort": {
+        "sorted": false,
+        "unsorted": true,
+        "empty": true
+    },
+    "empty": false
+}

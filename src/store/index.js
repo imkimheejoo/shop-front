@@ -4,7 +4,8 @@ import { account, setAuthInHeader } from '../api'
 import {
     fetchProducts, fetchProduct, fetchReviews, fetchReview,
     fetchQnas, fetchQna, addReview, fetchOrderLog,
-    addQuestion, fetchAccountCarts, deleteCartItem, addOrderItems
+    addQuestion, fetchAccountCarts, deleteCartItem, addOrderItems,
+    fetchProductsByKeyword
 } from '../api/index'
 
 Vue.use(Vuex);
@@ -64,6 +65,11 @@ const store = new Vuex.Store({
         },
         async FETCH_PRODUCTS({ commit }) {
             const response = await fetchProducts();
+            commit('SET_PRODUCTS', response.data);
+            return response;
+        },
+        async FETCH_PRODUCTS_BY_SEARCH_KEYWORD({ commit }, payload) {
+            const response = await fetchProductsByKeyword(payload);
             commit('SET_PRODUCTS', response.data);
             return response;
         },

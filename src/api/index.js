@@ -57,7 +57,15 @@ function fetchProducts() {
     try {
         return axios.get(`/api/products`);
     } catch (error) {
-        window.alert(error);
+        alert(error);
+    }
+}
+
+function fetchProductsByKeyword(payload) {
+    try {
+        return axios.get(`/api/products/search?keyword=${payload.keyword}`)
+    } catch(error) {
+        alert(error);
     }
 }
 
@@ -163,5 +171,6 @@ export {
     addQuestion,
     fetchAccountCarts,
     deleteCartItem,
-    addOrderItems
+    addOrderItems,
+    fetchProductsByKeyword
 }
