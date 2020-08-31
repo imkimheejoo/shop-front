@@ -4,16 +4,13 @@
       <div v-for="c in this.carts.contents" :key="c.id">
         <v-row class="pa-5">
           <v-col cols="1" class="ma-0 pr-0 pl-5 text-center">
-            <v-checkbox
-              v-model="selected"
-              :value="c.id"
-            ></v-checkbox>
+            <v-checkbox v-model="selected" :value="c.id"></v-checkbox>
           </v-col>
           <v-col cols="1" class="ma-0 pa-0">
             <v-img :src="c.imageUrl" height="100px" width="100px"></v-img>
           </v-col>
           <v-col class="pt-0">
-            <v-row>
+            <v-row class="pa-5">
               <v-col cols="11">
                 <h4>
                   <router-link
@@ -39,9 +36,16 @@
     </v-treeview>
     <div>
       <v-row>
-        <h4 class="pa-5">결제예정 금액</h4>
-        <h4 class="text-right">{{this.price}} 원</h4>
+        <v-col cols="9">
+          <h2 class="pa-5">결제예정 금액</h2>
+        </v-col>
+        <v-col cols="3">
+          <h2 class="text-right pa-5">{{this.price}} 원</h2>
+        </v-col>
       </v-row>
+      <v-btn block color="teal accent-4" dark class="mb-5">
+        <h3>구매하기</h3>
+      </v-btn>
     </div>
   </div>
 </template>
@@ -67,11 +71,10 @@ export default {
   },
   watch: {
     selected() {
-        this.price = 0;
-        for (let i = 0; i < this.selected.length; i++) {
-            this.price += this.carts.contents[i].totalPrice;
-            
-        }
+      this.price = this.carts.contents
+        .filter((i) => this.selected.includes(i.id))
+        .map(i => i.totalPrice)
+        .reduce((a, b) => a + b);
     },
   },
   methods: {
