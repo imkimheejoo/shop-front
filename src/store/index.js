@@ -1,7 +1,11 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import { account, setAuthInHeader } from '../api'
-import { fetchProducts, fetchProduct, fetchReviews, fetchReview, fetchQnas, fetchQna, addReview, fetchOrderLog, addQuestion} from '../api/index'
+import {
+    fetchProducts, fetchProduct, fetchReviews, fetchReview,
+    fetchQnas, fetchQna, addReview, fetchOrderLog,
+    addQuestion, fetchAccountCarts, deleteCartItem, addOrderItems
+} from '../api/index'
 
 Vue.use(Vuex);
 
@@ -10,11 +14,12 @@ const store = new Vuex.Store({
         account: {},
         accessToken: null,
         products: {},
-        product:{},
+        product: {},
         reviews: {},
-        review:{},
-        qnas:{},
-        qna:{}
+        review: {},
+        qnas: {},
+        qna: {},
+        carts: {}
     },
     mutations: {
         LOGIN(state, { accessToken }) {
@@ -46,6 +51,9 @@ const store = new Vuex.Store({
         },
         SET_QNA(state, qna) {
             state.qna = qna;
+        },
+        SET_CARTS(state, carts) {
+            state.carts = carts;
         }
     },
     actions: {
@@ -64,36 +72,49 @@ const store = new Vuex.Store({
             commit('SET_PRODUCT', response.data);
             return response;
         },
-        async FETCH_REVIEWS({commit}, payload) {
+        async FETCH_REVIEWS({ commit }, payload) {
             const response = await fetchReviews(payload);
             commit('SET_REVIEWS', response.data);
             return response;
         },
-        async FETCH_REVIEW({commit}, reviewId) {
+        async FETCH_REVIEW({ commit }, reviewId) {
             const response = await fetchReview(reviewId);
             commit('SET_REVIEW', response.data);
             return response;
         },
-        async FETCH_QNAS({commit}, productId) {
+        async FETCH_QNAS({ commit }, productId) {
             const response = await fetchQnas(productId);
             commit('SET_QNAS', response.data);
             return response;
         },
-        async FETCH_QNA({commit}, questionId) {
+        async FETCH_QNA({ commit }, questionId) {
             const response = await fetchQna(questionId);
             commit('SET_QNA', response.data);
             return response;
         },
-        async ADD_REVIEW(payload) {
+        async ADD_REVIEW(_, payload) {
             const response = await addReview(payload);
             return response;
         },
-        async FETCH_ORDERLOG(payload) {
+        async FETCH_ORDERLOG(_, payload) {
             const response = await fetchOrderLog(payload);
             return response;
         },
-        async ADD_QUESTION(payload) {
+        async ADD_QUESTION(_, payload) {
             const response = await addQuestion(payload);
+            return response;
+        },
+        async FETCH_ACCOUNT_CARTS({ commit }) {
+            const response = await fetchAccountCarts();
+            commit('SET_CARTS', response.data);
+            return response;
+        },
+        async DELETE_CART_ITEM(_, payload) {
+            const response = await deleteCartItem(payload.cartId);
+            return response;
+        },
+        async ADD_ORDER_ITEMS(_,payload) {
+            const response = await addOrderItems(payload);
             return response;
         }
 

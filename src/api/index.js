@@ -127,6 +127,30 @@ function addQuestion(payload) {
     }
 }
 
+function fetchAccountCarts() {
+    try {
+        return axios.get(`/api/carts`);
+    } catch (error) {
+        alert(error);
+    }
+}
+
+function deleteCartItem(cartId) {
+    try {
+        return axios.delete(`/api/carts/${cartId}`);
+    } catch (error) {
+        alert(error);
+    }
+}
+
+function addOrderItems(payload) {
+    try {
+        return axios.post(`/api/orders/items`, payload);
+    } catch (error) {
+        alert(error);
+    }
+}
+
 export {
     fetchProducts,
     fetchProduct,
@@ -136,5 +160,8 @@ export {
     fetchQna,
     addReview,
     fetchOrderLog,
-    addQuestion
+    addQuestion,
+    fetchAccountCarts,
+    deleteCartItem,
+    addOrderItems
 }

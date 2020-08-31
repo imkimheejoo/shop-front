@@ -5,6 +5,7 @@ import LoginView from "../views/LoginView";
 import CartView from "../views/CartView";
 import ProductsView from "../views/ProductsView";
 import IndexView from "../views/IndexView"
+import OrderView from "../views/OrderView"
 import store from '../store';
 
 Vue.use(VueRouter);
@@ -36,6 +37,7 @@ export const router = new VueRouter({
             path: '/mypage',
             name: 'mypage',
             component: AccountView,
+            // beforeEnter: requireAuth2(() => {store.dispatch('FETCH_ACCOUNT_CARTS')})
             beforeEnter: requireAuth()
         },
 
@@ -60,8 +62,14 @@ export const router = new VueRouter({
                         next();
                     }).catch((error) => {
                         alert(error);
-                })
+                    })
             }
+        },
+        {
+            path: '/order',
+            name: 'orderPage',
+            component: OrderView,
+            beforeEnter : requireAuth()
         }
     ]
 
