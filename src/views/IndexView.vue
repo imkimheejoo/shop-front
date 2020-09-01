@@ -1,7 +1,7 @@
 <template>
   <v-container class="mt-5">
-    <v-row  v-if="this.products" align="center" justify="center">
-      <Card
+    <v-row v-if="this.products" align="center" justify="center">
+      <card
         v-for="(product,index) in this.products.contents"
         class="ma-2"
         :key="index"
@@ -24,11 +24,6 @@
 import Card from "../components/Card";
 import { mapState, mapActions } from "vuex";
 export default {
-  watch: {
-    page() {
-      this.FETCH_PRODUCTS(this.page);
-    },
-  },
   data() {
     return {
       page: 3,
@@ -37,12 +32,17 @@ export default {
   components: {
     Card,
   },
+  watch: {
+    page() {
+      this.FETCH_PRODUCTS(this.page);
+    },
+  },
   computed: {
     ...mapState(["products"]),
   },
   methods: {
-    ...mapActions(["FETCH_PRODUCTS"])
-  }
+    ...mapActions(["FETCH_PRODUCTS"]),
+  },
 };
 </script>
 
