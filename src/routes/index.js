@@ -81,6 +81,21 @@ export const router = new VueRouter({
                     })
             }
         },
+
+        {
+            path: '/products/category/:category',
+            name: 'productsByCategory',
+            component: IndexView,
+            beforeEnter: (to, from, next) => {
+                store.dispatch('FETCH_PRODUCTS_BY_CATEGORY', ({ keyword: to.params.category }))
+                    .then(() => {
+                        next()
+                    }).catch(error => {
+                        alert(error);
+                    })
+            }
+        },
+
         {
             path: '/order',
             name: 'orderPage',

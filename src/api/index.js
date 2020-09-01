@@ -69,6 +69,14 @@ function fetchProductsByKeyword(payload) {
     }
 }
 
+function fetchProductsByCategory(payload) {
+    try {
+        return axios.get(`/api/products/category?category=${payload.category}`)
+    } catch(error) {
+        alert(error);
+    }
+}
+
 function fetchProduct(productId) {
     try {
         console.log(productId, "번 상품 가져옴");
@@ -172,5 +180,6 @@ export {
     fetchAccountCarts,
     deleteCartItem,
     addOrderItems,
-    fetchProductsByKeyword
+    fetchProductsByKeyword,
+    fetchProductsByCategory
 }

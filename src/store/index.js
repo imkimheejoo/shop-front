@@ -5,7 +5,7 @@ import {
     fetchProducts, fetchProduct, fetchReviews, fetchReview,
     fetchQnas, fetchQna, addReview, fetchOrderLog,
     addQuestion, fetchAccountCarts, deleteCartItem, addOrderItems,
-    fetchProductsByKeyword
+    fetchProductsByKeyword, fetchProductsByCategory
 } from '../api/index'
 
 Vue.use(Vuex);
@@ -70,6 +70,11 @@ const store = new Vuex.Store({
         },
         async FETCH_PRODUCTS_BY_SEARCH_KEYWORD({ commit }, payload) {
             const response = await fetchProductsByKeyword(payload);
+            commit('SET_PRODUCTS', response.data);
+            return response;
+        },
+        async FETCH_PRODUCTS_BY_CATEGORY({ commit }, payload) {
+            const response = await fetchProductsByCategory(payload);
             commit('SET_PRODUCTS', response.data);
             return response;
         },

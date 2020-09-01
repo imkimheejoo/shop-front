@@ -1,6 +1,6 @@
 <template>
   <v-app-bar color="teal accent-4" dark>
-    <v-app-bar-nav-icon></v-app-bar-nav-icon>
+    <v-app-bar-nav-icon @click="showCategoryTab()"></v-app-bar-nav-icon>
     <v-toolbar dark color="teal accent-4" flat>
       <router-link to="/" style="text-decoration: none">
         <v-toolbar-title class="white--text">Commerce</v-toolbar-title>
@@ -39,6 +39,7 @@
 
 <script>
 import { mapMutations, mapGetters } from "vuex";
+
 export default {
   name: "Navbar",
   data() {
@@ -52,9 +53,14 @@ export default {
   methods: {
     ...mapMutations(["LOGOUT"]),
 
+    showCategoryTab() {
+        this.$emit('showTab');
+    },
+
     searchByKeyword() {
       this.$router.push(`/products/search/${this.search}`).catch(() => {});
     },
+
     onLogout() {
       this.LOGOUT();
       this.$router.push("/");
