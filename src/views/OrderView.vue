@@ -13,6 +13,7 @@ import OrderProducts from "../components/orders/OrderProducts.vue";
 import Cupons from "../components/cupons/Cupons";
 import Delivery from "../components/deliveries/Delivery";
 import OrderPriceInfo from "../components/orders/OrderPriceInfo";
+import { mapActions } from 'vuex';
 
 export default {
   components: {
@@ -20,6 +21,12 @@ export default {
     Cupons,
     Delivery,
     OrderPriceInfo,
+  },
+  created() {
+    this.FETCH_ORDER_INFO({orderId: this.$route.params.orderId});
+  },
+  methods: {
+    ...mapActions(["FETCH_ORDER_INFO"])
   },
 };
 </script>

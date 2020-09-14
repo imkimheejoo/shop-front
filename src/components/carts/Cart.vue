@@ -108,8 +108,8 @@ export default {
 
     prepareOrderWithItems() {
       this.ADD_ORDER_ITEMS({ cartItems: this.selected })
-        .then(() => {
-          this.$router.push("/order");
+        .then(({data}) => {
+          this.$router.push(`/orders/${data.orderId}`);
         })
         .catch((error) => {
           alert(error);

@@ -5,7 +5,7 @@ import {
     fetchProducts, fetchProduct, fetchReviews, fetchReview,
     fetchQnas, fetchQna, addReview, fetchOrderLog,
     addQuestion, fetchAccountCarts, deleteCartItem, addOrderItems,
-    fetchProductsByKeyword, fetchProductsByCategory
+    fetchProductsByKeyword, fetchProductsByCategory, fetchOrderInfo
 } from '../api/index'
 
 Vue.use(Vuex);
@@ -20,7 +20,8 @@ const store = new Vuex.Store({
         review: {},
         qnas: {},
         qna: {},
-        carts: {}
+        carts: {},
+        orderInfo: {}
     },
     mutations: {
         LOGIN(state, { accessToken }) {
@@ -55,6 +56,9 @@ const store = new Vuex.Store({
         },
         SET_CARTS(state, carts) {
             state.carts = carts;
+        },
+        SET_ORDER_INFO(state, orderInfo) {
+            state.orderInfo = orderInfo;
         }
     },
     actions: {
@@ -124,8 +128,13 @@ const store = new Vuex.Store({
             const response = await deleteCartItem(payload.cartId);
             return response;
         },
-        async ADD_ORDER_ITEMS(_,payload) {
+        async ADD_ORDER_ITEMS(_, payload) {
             const response = await addOrderItems(payload);
+            return response;
+        },
+        async FETCH_ORDER_INFO({ commit }, payload) {
+            const response = await fetchOrderInfo(payload);
+            commit('SET_ORDER_INFO', response.data);
             return response;
         }
 

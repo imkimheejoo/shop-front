@@ -64,7 +64,7 @@ function fetchProducts() {
 function fetchProductsByKeyword(payload) {
     try {
         return axios.get(`/api/products/search?keyword=${payload.keyword}`)
-    } catch(error) {
+    } catch (error) {
         alert(error);
     }
 }
@@ -72,7 +72,7 @@ function fetchProductsByKeyword(payload) {
 function fetchProductsByCategory(payload) {
     try {
         return axios.get(`/api/products/category?category=${payload.category}`)
-    } catch(error) {
+    } catch (error) {
         alert(error);
     }
 }
@@ -167,6 +167,14 @@ function addOrderItems(payload) {
     }
 }
 
+function fetchOrderInfo(payload) {
+    try {
+        return axios.get(`/api/orders/${payload.orderId}`);
+    } catch (error) {
+        alert(error);
+    }
+}
+
 export {
     fetchProducts,
     fetchProduct,
@@ -181,5 +189,6 @@ export {
     deleteCartItem,
     addOrderItems,
     fetchProductsByKeyword,
-    fetchProductsByCategory
+    fetchProductsByCategory,
+    fetchOrderInfo
 }
