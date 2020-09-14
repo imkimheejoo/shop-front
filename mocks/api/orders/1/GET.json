@@ -1,0 +1,61 @@
+{
+    "orderProducts": [
+        {
+            "id": 1,
+            "productName": "슬랙스 바지",
+            "productId": 1,
+            "options": [
+                {
+                    "option": "26",
+                    "count": 1
+                }
+            ],
+            "imageUrl": "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
+            "totalPrice": 36000
+        },
+        {
+            "id": 2,
+            "productName": "오버핏 반팔 티",
+            "productId": 2,
+            "options": [
+                {
+                    "option": "검정",
+                    "count": 2
+                }
+            ],
+            "imageUrl": "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
+            "totalPrice": 40000
+        }
+    ],
+    "accountCupons": [
+        {
+            "id": 1,
+            "cuponName": "쿠폰1",
+            "salePrice": 5000,
+            "expireDate": "2020-12-31"
+        },
+        {
+            "id": 2,
+            "cuponName": "쿠폰2",
+            "salePrice": 4000,
+            "expireDate": "2020-12-31"
+        },
+        {
+            "id": 3,
+            "cuponName": "쿠폰3",
+            "salePrice": 3000,
+            "expireDate": "2020-12-31"
+        }
+    ],
+    "accountDeliveries": [
+        {
+            "id": 1,
+            "address": "경기도 남양주시 신비아파트 12동 34호"
+        },
+        {
+            "id": 2,
+            "address": "서울특별시 강남구 강남빌딩 12동 34호"
+        }
+    ],
+    "totalPrice": 100000
+}

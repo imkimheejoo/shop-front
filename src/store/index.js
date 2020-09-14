@@ -5,7 +5,8 @@ import {
     fetchProducts, fetchProduct, fetchReviews, fetchReview,
     fetchQnas, fetchQna, addReview, fetchOrderLog,
     addQuestion, fetchAccountCarts, deleteCartItem, addOrderItems,
-    fetchProductsByKeyword, fetchProductsByCategory
+    fetchProductsByKeyword, fetchProductsByCategory, fetchOrderInfo, addCupon, fetchCuponsByAccount,
+    addAdress, fetchAdressByAccount, addPayOrder
 } from '../api/index'
 
 Vue.use(Vuex);
@@ -20,7 +21,9 @@ const store = new Vuex.Store({
         review: {},
         qnas: {},
         qna: {},
-        carts: {}
+        carts: {},
+        orderInfo: {},
+        payInfo: {}
     },
     mutations: {
         LOGIN(state, { accessToken }) {
@@ -55,6 +58,18 @@ const store = new Vuex.Store({
         },
         SET_CARTS(state, carts) {
             state.carts = carts;
+        },
+        SET_ORDER_INFO(state, orderInfo) {
+            state.orderInfo = orderInfo;
+        },
+        SET_PAY_INFO(state, payInfo) {
+            state.payInfo = payInfo;
+        },
+        SET_CUPONS(state, cupons) {
+            state.orderInfo.accountCupons = cupons;
+        },
+        SET_DELICERIES(state, deliveries) {
+            state.orderInfo.accountDeliveries = deliveries;
         }
     },
     actions: {
@@ -124,8 +139,35 @@ const store = new Vuex.Store({
             const response = await deleteCartItem(payload.cartId);
             return response;
         },
-        async ADD_ORDER_ITEMS(_,payload) {
+        async ADD_ORDER_ITEMS(_, payload) {
             const response = await addOrderItems(payload);
+            return response;
+        },
+        async FETCH_ORDER_INFO({ commit }, payload) {
+            const response = await fetchOrderInfo(payload);
+            commit('SET_ORDER_INFO', response.data);
+            return response;
+        },
+        async ADD_CUPON(_, payload) {
+            const response = await addCupon(payload);
+            return response;
+        },
+        async FETCH_CUPONS_BY_ACCOUNT({commit}) {
+            const response = await fetchCuponsByAccount();
+            commit('SET_CUPONS', response.data.accountCupons);
+            return response;
+        },
+        async ADD_ADDRESS(_, payload) {
+            const response = await addAdress(payload);
+            return response;
+        },
+        async FETCH_ADDRESS_BY_ACCOUNT({ commit }) {
+            const response = await fetchAdressByAccount();
+            commit('SET_DELICERIES', response.data.accountDeliveries);
+            return response;
+        },
+        async ADD_PAY_ORDER(_, payload) {
+            const response = await addPayOrder(payload);
             return response;
         }
 

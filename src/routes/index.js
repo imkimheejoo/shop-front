@@ -97,11 +97,11 @@ export const router = new VueRouter({
         },
 
         {
-            path: '/order',
+            path: '/orders/:orderId',
             name: 'orderPage',
             component: OrderView,
             beforeEnter: requireAuth()
-        }
+        },
     ]
 
 });

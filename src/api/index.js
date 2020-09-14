@@ -64,7 +64,7 @@ function fetchProducts() {
 function fetchProductsByKeyword(payload) {
     try {
         return axios.get(`/api/products/search?keyword=${payload.keyword}`)
-    } catch(error) {
+    } catch (error) {
         alert(error);
     }
 }
@@ -72,7 +72,7 @@ function fetchProductsByKeyword(payload) {
 function fetchProductsByCategory(payload) {
     try {
         return axios.get(`/api/products/category?category=${payload.category}`)
-    } catch(error) {
+    } catch (error) {
         alert(error);
     }
 }
@@ -167,6 +167,54 @@ function addOrderItems(payload) {
     }
 }
 
+function fetchOrderInfo(payload) {
+    try {
+        return axios.get(`/api/orders/${payload.orderId}`);
+    } catch (error) {
+        alert(error);
+    }
+}
+
+function addCupon(payload) {
+    try {
+        return axios.post(`/api/cupons`, payload);
+    } catch (error) {
+        alert(error);
+    }
+}
+
+function fetchCuponsByAccount() {
+    try {
+        return axios.get(`/api/cupons`);
+    } catch (error) {
+        alert(error);
+    }
+}
+
+function addAdress(payload) {
+    try {
+        return axios.post(`/api/deliveries`, payload);
+    } catch (error) {
+        alert(error);
+    }
+}
+
+function fetchAdressByAccount() {
+    try {
+        return axios.get(`/api/deliveries`);
+    } catch (error) {
+        alert(error);
+    }
+}
+
+function addPayOrder() {
+    try {
+        return axios.post(`/api/pay`);
+    } catch (error) {
+        alert(error);
+    }
+}
+
 export {
     fetchProducts,
     fetchProduct,
@@ -181,5 +229,12 @@ export {
     deleteCartItem,
     addOrderItems,
     fetchProductsByKeyword,
-    fetchProductsByCategory
+    fetchProductsByCategory,
+    fetchOrderInfo,
+    addCupon,
+    fetchCuponsByAccount,
+    addAdress,
+    fetchAdressByAccount,
+    addPayOrder
+    
 }
