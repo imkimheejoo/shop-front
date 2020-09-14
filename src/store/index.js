@@ -21,7 +21,8 @@ const store = new Vuex.Store({
         qnas: {},
         qna: {},
         carts: {},
-        orderInfo: {}
+        orderInfo: {},
+        payInfo:{}
     },
     mutations: {
         LOGIN(state, { accessToken }) {
@@ -59,6 +60,9 @@ const store = new Vuex.Store({
         },
         SET_ORDER_INFO(state, orderInfo) {
             state.orderInfo = orderInfo;
+        },
+        SET_PAY_INFO(state, payInfo) {
+            state.payInfo = payInfo;
         }
     },
     actions: {
