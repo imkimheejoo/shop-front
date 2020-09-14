@@ -175,6 +175,22 @@ function fetchOrderInfo(payload) {
     }
 }
 
+function addCupon(payload) {
+    try {
+        return axios.post(`/api/cupons`, payload);
+    } catch (error) {
+        alert(error);
+    }
+}
+
+function fetchCuponsByAccount() {
+    try {
+        return axios.get(`/api/cupons`);
+    } catch (error) {
+        alert(error);
+    }
+}
+
 export {
     fetchProducts,
     fetchProduct,
@@ -190,5 +206,7 @@ export {
     addOrderItems,
     fetchProductsByKeyword,
     fetchProductsByCategory,
-    fetchOrderInfo
+    fetchOrderInfo,
+    addCupon,
+    fetchCuponsByAccount
 }

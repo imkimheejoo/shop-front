@@ -5,7 +5,7 @@ import {
     fetchProducts, fetchProduct, fetchReviews, fetchReview,
     fetchQnas, fetchQna, addReview, fetchOrderLog,
     addQuestion, fetchAccountCarts, deleteCartItem, addOrderItems,
-    fetchProductsByKeyword, fetchProductsByCategory, fetchOrderInfo
+    fetchProductsByKeyword, fetchProductsByCategory, fetchOrderInfo, addCupon, fetchCuponsByAccount
 } from '../api/index'
 
 Vue.use(Vuex);
@@ -22,7 +22,7 @@ const store = new Vuex.Store({
         qna: {},
         carts: {},
         orderInfo: {},
-        payInfo:{}
+        payInfo: {}
     },
     mutations: {
         LOGIN(state, { accessToken }) {
@@ -139,6 +139,14 @@ const store = new Vuex.Store({
         async FETCH_ORDER_INFO({ commit }, payload) {
             const response = await fetchOrderInfo(payload);
             commit('SET_ORDER_INFO', response.data);
+            return response;
+        },
+        async ADD_CUPON(_, payload) {
+            const response = await addCupon(payload);
+            return response;
+        },
+        async FETCH_CUPONS_BY_ACCOUNT() {
+            const response = await fetchCuponsByAccount();
             return response;
         }
 
