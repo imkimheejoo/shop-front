@@ -65,14 +65,8 @@ export default {
           if (response.status === 200) {
             alert("쿠폰이 정상적으로 등록되었습니다!");
             this.registerCupon = false;
+            this.FETCH_CUPONS_BY_ACCOUNT();
 
-            this.FETCH_CUPONS_BY_ACCOUNT()
-              .then(({ data }) => {
-                this.orderInfo.accountCupons = data.accountCupons;
-              })
-              .catch((error) => {
-                alert(error.message);
-              });
           } else {
             alert(response.message);
           }

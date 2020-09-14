@@ -191,6 +191,22 @@ function fetchCuponsByAccount() {
     }
 }
 
+function addAdress(payload) {
+    try {
+        return axios.post(`/api/deliveries`, payload);
+    } catch (error) {
+        alert(error);
+    }
+}
+
+function fetchAdressByAccount() {
+    try {
+        return axios.get(`/api/deliveries`);
+    } catch (error) {
+        alert(error);
+    }
+}
+
 export {
     fetchProducts,
     fetchProduct,
@@ -208,5 +224,8 @@ export {
     fetchProductsByCategory,
     fetchOrderInfo,
     addCupon,
-    fetchCuponsByAccount
+    fetchCuponsByAccount,
+    addAdress,
+    fetchAdressByAccount
+    
 }

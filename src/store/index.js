@@ -5,7 +5,8 @@ import {
     fetchProducts, fetchProduct, fetchReviews, fetchReview,
     fetchQnas, fetchQna, addReview, fetchOrderLog,
     addQuestion, fetchAccountCarts, deleteCartItem, addOrderItems,
-    fetchProductsByKeyword, fetchProductsByCategory, fetchOrderInfo, addCupon, fetchCuponsByAccount
+    fetchProductsByKeyword, fetchProductsByCategory, fetchOrderInfo, addCupon, fetchCuponsByAccount,
+    addAdress, fetchAdressByAccount
 } from '../api/index'
 
 Vue.use(Vuex);
@@ -63,6 +64,12 @@ const store = new Vuex.Store({
         },
         SET_PAY_INFO(state, payInfo) {
             state.payInfo = payInfo;
+        },
+        SET_CUPONS(state, cupons) {
+            state.orderInfo.accountCupons = cupons;
+        },
+        SET_DELICERIES(state, deliveries) {
+            state.orderInfo.accountDeliveries = deliveries;
         }
     },
     actions: {
@@ -145,8 +152,18 @@ const store = new Vuex.Store({
             const response = await addCupon(payload);
             return response;
         },
-        async FETCH_CUPONS_BY_ACCOUNT() {
+        async FETCH_CUPONS_BY_ACCOUNT({commit}) {
             const response = await fetchCuponsByAccount();
+            commit('SET_CUPONS', response.data.accountCupons);
+            return response;
+        },
+        async ADD_ADDRESS(_, payload) {
+            const response = await addAdress(payload);
+            return response;
+        },
+        async FETCH_ADDRESS_BY_ACCOUNT({ commit }) {
+            const response = await fetchAdressByAccount();
+            commit('SET_DELICERIES', response.data.accountDeliveries);
             return response;
         }
 
