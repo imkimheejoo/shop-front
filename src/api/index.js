@@ -207,6 +207,14 @@ function fetchAdressByAccount() {
     }
 }
 
+function addPayOrder() {
+    try {
+        return axios.post(`/api/pay`);
+    } catch (error) {
+        alert(error);
+    }
+}
+
 export {
     fetchProducts,
     fetchProduct,
@@ -226,6 +234,7 @@ export {
     addCupon,
     fetchCuponsByAccount,
     addAdress,
-    fetchAdressByAccount
+    fetchAdressByAccount,
+    addPayOrder
     
 }

@@ -101,7 +101,7 @@ export const router = new VueRouter({
             name: 'orderPage',
             component: OrderView,
             beforeEnter: requireAuth()
-        }
+        },
     ]
 
 });

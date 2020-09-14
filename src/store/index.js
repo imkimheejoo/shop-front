@@ -6,7 +6,7 @@ import {
     fetchQnas, fetchQna, addReview, fetchOrderLog,
     addQuestion, fetchAccountCarts, deleteCartItem, addOrderItems,
     fetchProductsByKeyword, fetchProductsByCategory, fetchOrderInfo, addCupon, fetchCuponsByAccount,
-    addAdress, fetchAdressByAccount
+    addAdress, fetchAdressByAccount, addPayOrder
 } from '../api/index'
 
 Vue.use(Vuex);
@@ -164,6 +164,10 @@ const store = new Vuex.Store({
         async FETCH_ADDRESS_BY_ACCOUNT({ commit }) {
             const response = await fetchAdressByAccount();
             commit('SET_DELICERIES', response.data.accountDeliveries);
+            return response;
+        },
+        async ADD_PAY_ORDER(_, payload) {
+            const response = await addPayOrder(payload);
             return response;
         }
 

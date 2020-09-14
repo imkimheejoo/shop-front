@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="pa-5">
+    <h3 class="pb-5">결제 상품</h3>
     <div v-for="p in this.orderInfo.orderProducts" :key="p.id">
       <v-row class="pa-5">
         <v-col cols="1" class="ma-0 pa-0">
