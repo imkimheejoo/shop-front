@@ -111,9 +111,9 @@ function fetchQnas(payload) {
     }
 }
 
-function fetchQna(questionId) {
+function fetchQna(payload) {
     try {
-        return axios.get(`/api/questions/${questionId}`);
+        return axios.get(`/api/questions/${payload.questionId}`);
     } catch (error) {
         alert(error);
     }
@@ -231,6 +231,22 @@ function cancelOrder(payload) {
     }
 }
 
+function fetchQuestionsByAccount(payload) {
+    try {
+        return axios.get(`/api/questions?page=${payload.page - 1}&size=${payload.size}`);
+    } catch (error) {
+        alert(error);
+    }
+}
+
+function deleteQuestion(payload) {
+    try {
+        return axios.patch(`/api/questions/${payload.questionId}`);
+    } catch (error) {
+        alert(error);
+    }
+}
+
 export {
     fetchProducts,
     fetchProduct,
@@ -253,6 +269,8 @@ export {
     fetchAdressByAccount,
     addPayOrder,
     fetchMyOrderLog,
-    cancelOrder
+    cancelOrder,
+    fetchQuestionsByAccount,
+    deleteQuestion
 
 }

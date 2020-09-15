@@ -6,7 +6,8 @@ import {
     fetchQnas, fetchQna, addReview, fetchOrderLog,
     addQuestion, fetchAccountCarts, deleteCartItem, addOrderItems,
     fetchProductsByKeyword, fetchProductsByCategory, fetchOrderInfo, addCupon, fetchCuponsByAccount,
-    addAdress, fetchAdressByAccount, addPayOrder, fetchMyOrderLog, cancelOrder
+    addAdress, fetchAdressByAccount, addPayOrder, fetchMyOrderLog, cancelOrder, fetchQuestionsByAccount,
+    deleteQuestion
 } from '../api/index'
 
 Vue.use(Vuex);
@@ -24,7 +25,8 @@ const store = new Vuex.Store({
         carts: {},
         orderInfo: {},
         payInfo: {},
-        orderLog: {}
+        orderLog: {},
+        myQuestions: {}
     },
     mutations: {
         LOGIN(state, { accessToken }) {
@@ -74,6 +76,9 @@ const store = new Vuex.Store({
         },
         SET_ORDER_LOG(state, orderLog) {
             state.orderLog = orderLog;
+        },
+        SET_MY_QUESTIONS(state, myQuestions) {
+            state.myQuestions = myQuestions;
         }
     },
     actions: {
@@ -117,8 +122,8 @@ const store = new Vuex.Store({
             commit('SET_QNAS', response.data);
             return response;
         },
-        async FETCH_QNA({ commit }, questionId) {
-            const response = await fetchQna(questionId);
+        async FETCH_QNA({ commit }, payload) {
+            const response = await fetchQna(payload);
             commit('SET_QNA', response.data);
             return response;
         },
@@ -181,6 +186,15 @@ const store = new Vuex.Store({
         },
         async CANCEL_ORDER(_, payload) {
             const response = await cancelOrder(payload);
+            return response;
+        },
+        async FETCH_QUESTIONS_BY_ACCOUNT({commit}, payload) {
+            const response = await fetchQuestionsByAccount(payload);
+            commit('SET_MY_QUESTIONS', response.data);
+            return response;
+        },
+        async DELETE_QUESTION(_, payload) {
+            const response = await deleteQuestion(payload);
             return response;
         }
 

@@ -125,7 +125,7 @@ export default {
     ...mapActions(["FETCH_QNA", "FETCH_QNAS", "ADD_QUESTION"]),
 
     show(questionId) {
-      this.FETCH_QNA(questionId)
+      this.FETCH_QNA({questionId})
         .then(() => {
           this.dialog = !this.dialog;
         })

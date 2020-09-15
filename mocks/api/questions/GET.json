@@ -1,0 +1,53 @@
+{
+    "contents": [
+        {
+            "id": 1,
+            "title": "문의 입니다~~",
+            "questionDate": "2020-08-25",
+            "content": "제가 키가 어쩌구저쩌구 인데 이 기장이면 어디까지 내려오는지 알 수 있을까요??",
+            "imageUrl": "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
+            "answerState" : "답변완료"
+        },
+        {
+            "id": 2,
+            "title": "문의2 입니다~~",
+            "questionDate": "2020-08-26",
+            "content": "문의2 요??",
+            "imageUrl": "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
+            "answerState" : "답변대기"
+        },
+        {
+            "id": 4,
+            "title": "문의3 입니다~~",
+            "questionDate": "2020-08-27",
+            "content": "문의3요 ??",
+            "imageUrl": "https://cdn.vuetifyjs.com/images/cards/sunshine.jpg",
+            "answerState" : "답변대기"
+        }
+    ],
+    "pageable": {
+        "sort": {
+            "sorted": false,
+            "unsorted": true,
+            "empty": true
+        },
+        "offset": 0,
+        "pageNumber": 3,
+        "pageSize": 12,
+        "paged": true,
+        "unpaged": false
+    },
+    "last": false,
+    "totalPages": 10,
+    "totalElements": 120,
+    "size": 12,
+    "number": 0,
+    "first": true,
+    "numberOfElements": 10,
+    "sort": {
+        "sorted": false,
+        "unsorted": true,
+        "empty": true
+    },
+    "empty": false
+}
