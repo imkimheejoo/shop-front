@@ -8,7 +8,7 @@
           </h3>
         </v-col>
         <v-col class="text-right">
-          <v-btn>주문취소</v-btn>
+          <v-btn @click="cancelOrder(o.id)">주문취소</v-btn>
         </v-col>
       </v-row>
       <v-row>
@@ -55,7 +55,18 @@ export default {
   },
 
   methods: {
-    ...mapActions(["FETCH_MY_ORDER_LOG"]),
+    ...mapActions(["FETCH_MY_ORDER_LOG", "CANCEL_ORDER"]),
+    cancelOrder(orderId) {
+      this.CANCEL_ORDER({ orderLogId: orderId }).then((response) => {
+        if (response.status === 200) {
+          alert("주문을 취소하였습니다.");
+          const { page, size } = this;
+          this.FETCH_MY_ORDER_LOG({ page, size });
+        } else {
+          alert(response.date.message);
+        }
+      });
+    },
   },
 };
 </script>

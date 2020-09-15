@@ -6,7 +6,7 @@ import {
     fetchQnas, fetchQna, addReview, fetchOrderLog,
     addQuestion, fetchAccountCarts, deleteCartItem, addOrderItems,
     fetchProductsByKeyword, fetchProductsByCategory, fetchOrderInfo, addCupon, fetchCuponsByAccount,
-    addAdress, fetchAdressByAccount, addPayOrder, fetchMyOrderLog
+    addAdress, fetchAdressByAccount, addPayOrder, fetchMyOrderLog, cancelOrder
 } from '../api/index'
 
 Vue.use(Vuex);
@@ -177,6 +177,10 @@ const store = new Vuex.Store({
         async FETCH_MY_ORDER_LOG({commit}, payload) {
             const response = await fetchMyOrderLog(payload);
             commit('SET_ORDER_LOG', response.data);
+            return response;
+        },
+        async CANCEL_ORDER(_, payload) {
+            const response = await cancelOrder(payload);
             return response;
         }
 

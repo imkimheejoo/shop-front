@@ -223,6 +223,14 @@ function fetchMyOrderLog(payload) {
     }
 }
 
+function cancelOrder(payload) {
+    try {
+        return axios.patch(`/api/orders/${payload.orderLogId}`);
+    } catch (error) {
+        alert(error);
+    }
+}
+
 export {
     fetchProducts,
     fetchProduct,
@@ -244,6 +252,7 @@ export {
     addAdress,
     fetchAdressByAccount,
     addPayOrder,
-    fetchMyOrderLog
+    fetchMyOrderLog,
+    cancelOrder
 
 }
