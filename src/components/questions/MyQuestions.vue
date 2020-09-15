@@ -98,7 +98,6 @@ export default {
           alert(response.data.message);
         }
       });
-      console.log(questionId + "삭제");
     },
 
     show(questionId) {

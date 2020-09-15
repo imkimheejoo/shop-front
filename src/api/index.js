@@ -199,8 +199,11 @@ function addAdress(payload) {
     }
 }
 
-function fetchAdressByAccount() {
+function fetchAdressByAccount(payload) {
     try {
+        if (payload) {
+            return axios.get(`/api/deliveries?${payload.page - 1}&size=${payload.size}`);
+        }
         return axios.get(`/api/deliveries`);
     } catch (error) {
         alert(error);
@@ -247,6 +250,14 @@ function deleteQuestion(payload) {
     }
 }
 
+function deleteAddress(payload) {
+    try {
+        return axios.patch(`/api/deliveries/${payload.deliveryId}`);
+    } catch (error) {
+        alert(error);
+    }
+}
+
 export {
     fetchProducts,
     fetchProduct,
@@ -271,6 +282,7 @@ export {
     fetchMyOrderLog,
     cancelOrder,
     fetchQuestionsByAccount,
-    deleteQuestion
+    deleteQuestion,
+    deleteAddress
 
 }

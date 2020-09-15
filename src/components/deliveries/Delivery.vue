@@ -68,7 +68,9 @@ export default {
       this.ADD_ADDRESS({ address: this.newAddress })
         .then(() => {
           this.registerDelivery = false;
-          this.FETCH_ADDRESS_BY_ACCOUNT();
+          this.FETCH_ADDRESS_BY_ACCOUNT().then(({ data }) => {
+            this.orderInfo.accountDeliveries = data.addresses;
+          });
         })
         .catch((error) => {
           alert(error.message);

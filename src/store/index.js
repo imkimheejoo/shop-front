@@ -7,7 +7,7 @@ import {
     addQuestion, fetchAccountCarts, deleteCartItem, addOrderItems,
     fetchProductsByKeyword, fetchProductsByCategory, fetchOrderInfo, addCupon, fetchCuponsByAccount,
     addAdress, fetchAdressByAccount, addPayOrder, fetchMyOrderLog, cancelOrder, fetchQuestionsByAccount,
-    deleteQuestion
+    deleteQuestion, deleteAddress
 } from '../api/index'
 
 Vue.use(Vuex);
@@ -26,7 +26,8 @@ const store = new Vuex.Store({
         orderInfo: {},
         payInfo: {},
         orderLog: {},
-        myQuestions: {}
+        myQuestions: {},
+        myAddresses: {}
     },
     mutations: {
         LOGIN(state, { accessToken }) {
@@ -71,14 +72,14 @@ const store = new Vuex.Store({
         SET_CUPONS(state, cupons) {
             state.orderInfo.accountCupons = cupons;
         },
-        SET_DELICERIES(state, deliveries) {
-            state.orderInfo.accountDeliveries = deliveries;
-        },
         SET_ORDER_LOG(state, orderLog) {
             state.orderLog = orderLog;
         },
         SET_MY_QUESTIONS(state, myQuestions) {
             state.myQuestions = myQuestions;
+        },
+        SET_MY_ADDRESSES(state, myAddresses) {
+            state.myAddresses = myAddresses;
         }
     },
     actions: {
@@ -161,7 +162,7 @@ const store = new Vuex.Store({
             const response = await addCupon(payload);
             return response;
         },
-        async FETCH_CUPONS_BY_ACCOUNT({commit}) {
+        async FETCH_CUPONS_BY_ACCOUNT({ commit }) {
             const response = await fetchCuponsByAccount();
             commit('SET_CUPONS', response.data.accountCupons);
             return response;
@@ -170,16 +171,15 @@ const store = new Vuex.Store({
             const response = await addAdress(payload);
             return response;
         },
-        async FETCH_ADDRESS_BY_ACCOUNT({ commit }) {
-            const response = await fetchAdressByAccount();
-            commit('SET_DELICERIES', response.data.accountDeliveries);
+        async FETCH_ADDRESS_BY_ACCOUNT(payload) {
+            const response = await fetchAdressByAccount(payload);
             return response;
         },
         async ADD_PAY_ORDER(_, payload) {
             const response = await addPayOrder(payload);
             return response;
         },
-        async FETCH_MY_ORDER_LOG({commit}, payload) {
+        async FETCH_MY_ORDER_LOG({ commit }, payload) {
             const response = await fetchMyOrderLog(payload);
             commit('SET_ORDER_LOG', response.data);
             return response;
@@ -188,13 +188,17 @@ const store = new Vuex.Store({
             const response = await cancelOrder(payload);
             return response;
         },
-        async FETCH_QUESTIONS_BY_ACCOUNT({commit}, payload) {
+        async FETCH_QUESTIONS_BY_ACCOUNT({ commit }, payload) {
             const response = await fetchQuestionsByAccount(payload);
             commit('SET_MY_QUESTIONS', response.data);
             return response;
         },
         async DELETE_QUESTION(_, payload) {
             const response = await deleteQuestion(payload);
+            return response;
+        },
+        async DELETE_ADDRESS(_, payload) {
+            const response = await deleteAddress(payload);
             return response;
         }
 
