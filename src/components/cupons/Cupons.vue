@@ -32,7 +32,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapMutations, mapState } from "vuex";
 export default {
   data() {
     return {
@@ -50,6 +50,7 @@ export default {
     ...mapState(["orderInfo"]),
   },
   methods: {
+    ...mapMutations(["SET_CUPONS"]),
     ...mapActions(["ADD_CUPON", "FETCH_CUPONS_BY_ACCOUNT"]),
 
     validate() {
@@ -65,7 +66,9 @@ export default {
           if (response.status === 200) {
             alert("쿠폰이 정상적으로 등록되었습니다!");
             this.registerCupon = false;
-            this.FETCH_CUPONS_BY_ACCOUNT();
+            this.FETCH_CUPONS_BY_ACCOUNT().then(({data}) => {
+              this.SET_CUPONS(data.cupons);
+            })
 
           } else {
             alert(response.message);

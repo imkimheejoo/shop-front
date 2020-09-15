@@ -111,9 +111,9 @@ function fetchQnas(payload) {
     }
 }
 
-function fetchQna(questionId) {
+function fetchQna(payload) {
     try {
-        return axios.get(`/api/questions/${questionId}`);
+        return axios.get(`/api/questions/${payload.questionId}`);
     } catch (error) {
         alert(error);
     }
@@ -183,8 +183,11 @@ function addCupon(payload) {
     }
 }
 
-function fetchCuponsByAccount() {
+function fetchCuponsByAccount(payload) {
     try {
+        if(payload) {
+            return axios.get(`/api/cupons?${payload.page -1}&size=${payload.size}`);
+        }
         return axios.get(`/api/cupons`);
     } catch (error) {
         alert(error);
@@ -199,8 +202,11 @@ function addAdress(payload) {
     }
 }
 
-function fetchAdressByAccount() {
+function fetchAdressByAccount(payload) {
     try {
+        if (payload) {
+            return axios.get(`/api/deliveries?${payload.page - 1}&size=${payload.size}`);
+        }
         return axios.get(`/api/deliveries`);
     } catch (error) {
         alert(error);
@@ -210,6 +216,46 @@ function fetchAdressByAccount() {
 function addPayOrder() {
     try {
         return axios.post(`/api/pay`);
+    } catch (error) {
+        alert(error);
+    }
+}
+
+function fetchMyOrderLog(payload) {
+    try {
+        return axios.get(`/api/orders?page=${payload.page - 1}&size=${payload.size}`);
+    } catch (error) {
+        alert(error);
+    }
+}
+
+function cancelOrder(payload) {
+    try {
+        return axios.patch(`/api/orders/${payload.orderLogId}`);
+    } catch (error) {
+        alert(error);
+    }
+}
+
+function fetchQuestionsByAccount(payload) {
+    try {
+        return axios.get(`/api/questions?page=${payload.page - 1}&size=${payload.size}`);
+    } catch (error) {
+        alert(error);
+    }
+}
+
+function deleteQuestion(payload) {
+    try {
+        return axios.patch(`/api/questions/${payload.questionId}`);
+    } catch (error) {
+        alert(error);
+    }
+}
+
+function deleteAddress(payload) {
+    try {
+        return axios.patch(`/api/deliveries/${payload.deliveryId}`);
     } catch (error) {
         alert(error);
     }
@@ -235,6 +281,11 @@ export {
     fetchCuponsByAccount,
     addAdress,
     fetchAdressByAccount,
-    addPayOrder
-    
+    addPayOrder,
+    fetchMyOrderLog,
+    cancelOrder,
+    fetchQuestionsByAccount,
+    deleteQuestion,
+    deleteAddress
+
 }

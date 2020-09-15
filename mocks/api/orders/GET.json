@@ -1,28 +1,18 @@
 {
-    "cupons": [
+    "orderLog": [
         {
             "id": 1,
-            "cuponName": "쿠폰1",
-            "salePrice": 5000,
-            "expireDate": "2020-12-31"
+            "orderTitle": "슬랙스 바지 외 1개",
+            "address": "서울특별시 신비아파트 12동 34호",
+            "orderState": "입금확인",
+            "totalPrice": 100000
         },
         {
             "id": 2,
-            "cuponName": "쿠폰2",
-            "salePrice": 4000,
-            "expireDate": "2020-12-31"
-        },
-        {
-            "id": 3,
-            "cuponName": "쿠폰3",
-            "salePrice": 3000,
-            "expireDate": "2020-12-31"
-        },
-        {
-            "id": 4,
-            "cuponName": "new 쿠폰",
-            "salePrice": 8000,
-            "expireDate": "2020-12-31"
+            "orderTitle": "슬랙스 바지 외 2개",
+            "address": "서울특별시 신비아파트 12동 34호",
+            "orderState": "배송중",
+            "totalPrice": 100000
         }
     ],
     "pageable": {
