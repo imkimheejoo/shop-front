@@ -1,6 +1,6 @@
 <template>
   <v-container class="mt-5">
-    <v-tabs fixed-tabs background-color="grey lighten-1">
+    <v-tabs fixed-tabs background-color="grey lighten-1" class="mb-2">
       <v-tab @click="currentTab = 'MyOrderLog'">주문내역</v-tab>
       <v-tab @click="currentTab = 'MyQuestions'">문의내역</v-tab>
       <v-tab @click="currentTab = 'MyDeliveries'">배송지관리</v-tab>

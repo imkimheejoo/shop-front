@@ -1,0 +1,43 @@
+{
+    "orderLog": [
+        {
+            "id": 1,
+            "orderTitle": "슬랙스 바지 외 1개",
+            "address": "서울특별시 신비아파트 12동 34호",
+            "orderState": "입금확인",
+            "totalPrice": 100000
+        },
+        {
+            "id": 2,
+            "orderTitle": "슬랙스 바지 외 2개",
+            "address": "서울특별시 신비아파트 12동 34호",
+            "orderState": "배송중",
+            "totalPrice": 100000
+        }
+    ],
+    "pageable": {
+        "sort": {
+            "sorted": false,
+            "unsorted": true,
+            "empty": true
+        },
+        "offset": 0,
+        "pageNumber": 3,
+        "pageSize": 12,
+        "paged": true,
+        "unpaged": false
+    },
+    "last": false,
+    "totalPages": 10,
+    "totalElements": 120,
+    "size": 12,
+    "number": 0,
+    "first": true,
+    "numberOfElements": 10,
+    "sort": {
+        "sorted": false,
+        "unsorted": true,
+        "empty": true
+    },
+    "empty": false
+}

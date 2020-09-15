@@ -6,7 +6,7 @@ import {
     fetchQnas, fetchQna, addReview, fetchOrderLog,
     addQuestion, fetchAccountCarts, deleteCartItem, addOrderItems,
     fetchProductsByKeyword, fetchProductsByCategory, fetchOrderInfo, addCupon, fetchCuponsByAccount,
-    addAdress, fetchAdressByAccount, addPayOrder
+    addAdress, fetchAdressByAccount, addPayOrder, fetchMyOrderLog
 } from '../api/index'
 
 Vue.use(Vuex);
@@ -23,7 +23,8 @@ const store = new Vuex.Store({
         qna: {},
         carts: {},
         orderInfo: {},
-        payInfo: {}
+        payInfo: {},
+        orderLog: {}
     },
     mutations: {
         LOGIN(state, { accessToken }) {
@@ -70,6 +71,9 @@ const store = new Vuex.Store({
         },
         SET_DELICERIES(state, deliveries) {
             state.orderInfo.accountDeliveries = deliveries;
+        },
+        SET_ORDER_LOG(state, orderLog) {
+            state.orderLog = orderLog;
         }
     },
     actions: {
@@ -168,6 +172,11 @@ const store = new Vuex.Store({
         },
         async ADD_PAY_ORDER(_, payload) {
             const response = await addPayOrder(payload);
+            return response;
+        },
+        async FETCH_MY_ORDER_LOG({commit}, payload) {
+            const response = await fetchMyOrderLog(payload);
+            commit('SET_ORDER_LOG', response.data);
             return response;
         }
 

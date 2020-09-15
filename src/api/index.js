@@ -215,6 +215,14 @@ function addPayOrder() {
     }
 }
 
+function fetchMyOrderLog(payload) {
+    try {
+        return axios.get(`/api/orders?page=${payload.page - 1}&size=${payload.size}`);
+    } catch (error) {
+        alert(error);
+    }
+}
+
 export {
     fetchProducts,
     fetchProduct,
@@ -235,6 +243,7 @@ export {
     fetchCuponsByAccount,
     addAdress,
     fetchAdressByAccount,
-    addPayOrder
-    
+    addPayOrder,
+    fetchMyOrderLog
+
 }
