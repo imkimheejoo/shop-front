@@ -1,5 +1,5 @@
 {
-    "accountCupons": [
+    "cupons": [
         {
             "id": 1,
             "cuponName": "쿠폰1",
@@ -24,5 +24,30 @@
             "salePrice": 8000,
             "expireDate": "2020-12-31"
         }
-    ]
+    ],
+    "pageable": {
+        "sort": {
+            "sorted": false,
+            "unsorted": true,
+            "empty": true
+        },
+        "offset": 0,
+        "pageNumber": 3,
+        "pageSize": 12,
+        "paged": true,
+        "unpaged": false
+    },
+    "last": false,
+    "totalPages": 10,
+    "totalElements": 120,
+    "size": 12,
+    "number": 0,
+    "first": true,
+    "numberOfElements": 10,
+    "sort": {
+        "sorted": false,
+        "unsorted": true,
+        "empty": true
+    },
+    "empty": false
 }

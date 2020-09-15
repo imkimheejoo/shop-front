@@ -183,8 +183,11 @@ function addCupon(payload) {
     }
 }
 
-function fetchCuponsByAccount() {
+function fetchCuponsByAccount(payload) {
     try {
+        if(payload) {
+            return axios.get(`/api/cupons?${payload.page -1}&size=${payload.size}`);
+        }
         return axios.get(`/api/cupons`);
     } catch (error) {
         alert(error);

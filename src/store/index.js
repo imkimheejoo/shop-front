@@ -27,7 +27,8 @@ const store = new Vuex.Store({
         payInfo: {},
         orderLog: {},
         myQuestions: {},
-        myAddresses: {}
+        myAddresses: {},
+        myCupons:{}
     },
     mutations: {
         LOGIN(state, { accessToken }) {
@@ -80,6 +81,9 @@ const store = new Vuex.Store({
         },
         SET_MY_ADDRESSES(state, myAddresses) {
             state.myAddresses = myAddresses;
+        },
+        SET_MY_CUPONS(state, myCupons) {
+            state.myCupons = myCupons;
         }
     },
     actions: {
@@ -162,9 +166,10 @@ const store = new Vuex.Store({
             const response = await addCupon(payload);
             return response;
         },
-        async FETCH_CUPONS_BY_ACCOUNT({ commit }) {
-            const response = await fetchCuponsByAccount();
-            commit('SET_CUPONS', response.data.accountCupons);
+        // async FETCH_CUPONS_BY_ACCOUNT({ commit }, payload) {
+        async FETCH_CUPONS_BY_ACCOUNT(payload) {
+            const response = await fetchCuponsByAccount(payload);
+            // commit('SET_CUPONS', response.data.accountCupons);
             return response;
         },
         async ADD_ADDRESS(_, payload) {
