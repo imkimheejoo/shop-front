@@ -11,7 +11,7 @@ import store from '../store';
 Vue.use(VueRouter);
 
 const requireAuth = () => (from, to, next) => {
-    store.state.accessToken ?
+    store.state.accounts.accessToken ?
         next() :
         next(`/login?returnPath=${encodeURIComponent(from.path)}`)
 };
@@ -37,7 +37,6 @@ export const router = new VueRouter({
             path: '/mypage',
             name: 'mypage',
             component: AccountView,
-            // beforeEnter: requireAuth2(() => {store.dispatch('FETCH_ACCOUNT_CARTS')})
             beforeEnter: requireAuth()
         },
 
