@@ -1,15 +1,14 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import {account, setAuthInHeader} from '../api'
-import {
-    addAdress, fetchAdressByAccount, deleteAddress
-} from '../api/index'
+
 import products from "./modules/products";
 import reviews from "./modules/reviews";
 import questions from "./modules/questions";
 import orders from "./modules/orders";
 import carts from "./modules/carts";
 import cupons from "./modules/cupons";
+import addresses from "./modules/addresses";
 
 Vue.use(Vuex);
 
@@ -20,12 +19,13 @@ const store = new Vuex.Store({
         questions,
         orders,
         carts,
-        cupons
+        cupons,
+        addresses
     },
     state: {
         account: {},
         accessToken: null,
-        myAddresses: {},
+        // myAddresses: {},
     },
     mutations: {
         LOGIN(state, {accessToken}) {
@@ -41,9 +41,9 @@ const store = new Vuex.Store({
             setAuthInHeader(null);
         },
 
-        SET_MY_ADDRESSES(state, myAddresses) {
-            state.myAddresses = myAddresses;
-        },
+        // SET_MY_ADDRESSES(state, myAddresses) {
+        //     state.myAddresses = myAddresses;
+        // },
 
     },
     actions: {
@@ -52,18 +52,18 @@ const store = new Vuex.Store({
             commit('LOGIN', response.data);
             return response;
         },
-        async ADD_ADDRESS(_, payload) {
-            const response = await addAdress(payload);
-            return response;
-        },
-        async FETCH_ADDRESS_BY_ACCOUNT(payload) {
-            const response = await fetchAdressByAccount(payload);
-            return response;
-        },
-        async DELETE_ADDRESS(_, payload) {
-            const response = await deleteAddress(payload);
-            return response;
-        }
+        // async ADD_ADDRESS(_, payload) {
+        //     const response = await addAdress(payload);
+        //     return response;
+        // },
+        // async FETCH_ADDRESS_BY_ACCOUNT(payload) {
+        //     const response = await fetchAdressByAccount(payload);
+        //     return response;
+        // },
+        // async DELETE_ADDRESS(_, payload) {
+        //     const response = await deleteAddress(payload);
+        //     return response;
+        // }
     },
     getters: {
         isAuthenticated(state) {
