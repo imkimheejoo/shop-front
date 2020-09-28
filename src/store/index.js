@@ -10,7 +10,6 @@ import {account, setAuthInHeader} from '../api'
 //     deleteQuestion, deleteAddress
 // } from '../api/index'
 import {
-    addOrderItems,
     addCupon, fetchCuponsByAccount,
     addAdress, fetchAdressByAccount, deleteAddress
 } from '../api/index'
@@ -33,7 +32,6 @@ const store = new Vuex.Store({
     state: {
         account: {},
         accessToken: null,
-        // carts: {},
         myAddresses: {},
         myCupons: {}
     },
@@ -50,9 +48,6 @@ const store = new Vuex.Store({
             delete localStorage.accessToken;
             setAuthInHeader(null);
         },
-        // SET_CARTS(state, carts) {
-        //     state.carts = carts;
-        // },
         SET_CUPONS(state, cupons) {
             state.orderInfo.accountCupons = cupons;
         },
@@ -69,19 +64,10 @@ const store = new Vuex.Store({
             commit('LOGIN', response.data);
             return response;
         },
-        // async FETCH_ACCOUNT_CARTS({commit}) {
-        //     const response = await fetchAccountCarts();
-        //     commit('SET_CARTS', response.data);
+        // async ADD_ORDER_ITEMS(_, payload) {
+        //     const response = await addOrderItems(payload);
         //     return response;
         // },
-        // async DELETE_CART_ITEM(_, payload) {
-        //     const response = await deleteCartItem(payload.cartId);
-        //     return response;
-        // },
-        async ADD_ORDER_ITEMS(_, payload) {
-            const response = await addOrderItems(payload);
-            return response;
-        },
         async ADD_CUPON(_, payload) {
             const response = await addCupon(payload);
             return response;

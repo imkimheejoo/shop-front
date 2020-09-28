@@ -1,4 +1,4 @@
-import {addPayOrder, cancelOrder, fetchMyOrderLog, fetchOrderInfo, fetchOrderLog} from "../../api";
+import {addOrderItems, addPayOrder, cancelOrder, fetchMyOrderLog, fetchOrderInfo, fetchOrderLog} from "../../api";
 
 const state = {
     orderInfo: {},
@@ -26,6 +26,10 @@ const actions = {
     async FETCH_ORDER_INFO({commit}, payload) {
         const response = await fetchOrderInfo(payload);
         commit('SET_ORDER_INFO', response.data);
+        return response;
+    },
+    async ADD_ORDER_ITEMS(_, payload) {
+        const response = await addOrderItems(payload);
         return response;
     },
     async ADD_PAY_ORDER(_, payload) {
