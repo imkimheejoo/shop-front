@@ -44,7 +44,7 @@
             }),
         },
         methods: {
-            ...mapActions(["products/FETCH_PRODUCTS"]),
+            ...mapActions(["FETCH_PRODUCTS"]),
         },
     };
 </script>

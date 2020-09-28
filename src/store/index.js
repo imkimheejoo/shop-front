@@ -10,28 +10,29 @@ import {account, setAuthInHeader} from '../api'
 //     deleteQuestion, deleteAddress
 // } from '../api/index'
 import {
-    fetchReviews, fetchReview,
-    fetchQnas, fetchQna, addReview, fetchOrderLog,
+    fetchQnas, fetchQna, fetchOrderLog,
     addQuestion, fetchAccountCarts, deleteCartItem, addOrderItems,
     fetchOrderInfo, addCupon, fetchCuponsByAccount,
     addAdress, fetchAdressByAccount, addPayOrder, fetchMyOrderLog, cancelOrder, fetchQuestionsByAccount,
     deleteQuestion, deleteAddress
 } from '../api/index'
 import products from "./modules/products";
+import reviews from "./modules/reviews";
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
     modules: {
-        products
+        reviews,
+        products,
     },
     state: {
         account: {},
         accessToken: null,
         // products: {},
         // product: {},
-        reviews: {},
-        review: {},
+        // reviews: {},
+        // review: {},
         qnas: {},
         qna: {},
         carts: {},
@@ -55,18 +56,12 @@ const store = new Vuex.Store({
             delete localStorage.accessToken;
             setAuthInHeader(null);
         },
-        // SET_PRODUCTS(state, products) {
-        //     state.products = products;
+        // SET_REVIEWS(state, reviews) {
+        //     state.reviews = reviews;
         // },
-        // SET_PRODUCT(state, product) {
-        //     state.product = product;
+        // SET_REVIEW(state, review) {
+        //     state.review = review;
         // },
-        SET_REVIEWS(state, reviews) {
-            state.reviews = reviews;
-        },
-        SET_REVIEW(state, review) {
-            state.review = review;
-        },
         SET_QNAS(state, qnas) {
             state.qnas = qnas;
         },
@@ -124,16 +119,16 @@ const store = new Vuex.Store({
         //     commit('SET_PRODUCT', response.data);
         //     return response;
         // },
-        async FETCH_REVIEWS({commit}, payload) {
-            const response = await fetchReviews(payload);
-            commit('SET_REVIEWS', response.data);
-            return response;
-        },
-        async FETCH_REVIEW({commit}, reviewId) {
-            const response = await fetchReview(reviewId);
-            commit('SET_REVIEW', response.data);
-            return response;
-        },
+        // async FETCH_REVIEWS({commit}, payload) {
+        //     const response = await fetchReviews(payload);
+        //     commit('SET_REVIEWS', response.data);
+        //     return response;
+        // },
+        // async FETCH_REVIEW({commit}, reviewId) {
+        //     const response = await fetchReview(reviewId);
+        //     commit('SET_REVIEW', response.data);
+        //     return response;
+        // },
         async FETCH_QNAS({commit}, productId) {
             const response = await fetchQnas(productId);
             commit('SET_QNAS', response.data);
@@ -144,10 +139,10 @@ const store = new Vuex.Store({
             commit('SET_QNA', response.data);
             return response;
         },
-        async ADD_REVIEW(_, payload) {
-            const response = await addReview(payload);
-            return response;
-        },
+        // async ADD_REVIEW(_, payload) {
+        //     const response = await addReview(payload);
+        //     return response;
+        // },
         async FETCH_ORDERLOG(_, payload) {
             const response = await fetchOrderLog(payload);
             return response;
