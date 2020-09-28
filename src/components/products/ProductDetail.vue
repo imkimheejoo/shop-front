@@ -8,7 +8,9 @@
 import { mapState } from "vuex";
 export default {
   computed: {
-    ...mapState(["product"]),
+    ...mapState({
+       product: state => state.products.product
+    }),
   },
 };
 </script>

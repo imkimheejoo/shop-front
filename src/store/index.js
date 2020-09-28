@@ -1,23 +1,35 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import { account, setAuthInHeader } from '../api'
+import {account, setAuthInHeader} from '../api'
+// import {
+//     fetchProducts, fetchProduct, fetchReviews, fetchReview,
+//     fetchQnas, fetchQna, addReview, fetchOrderLog,
+//     addQuestion, fetchAccountCarts, deleteCartItem, addOrderItems,
+//     fetchProductsByKeyword, fetchProductsByCategory, fetchOrderInfo, addCupon, fetchCuponsByAccount,
+//     addAdress, fetchAdressByAccount, addPayOrder, fetchMyOrderLog, cancelOrder, fetchQuestionsByAccount,
+//     deleteQuestion, deleteAddress
+// } from '../api/index'
 import {
-    fetchProducts, fetchProduct, fetchReviews, fetchReview,
+    fetchReviews, fetchReview,
     fetchQnas, fetchQna, addReview, fetchOrderLog,
     addQuestion, fetchAccountCarts, deleteCartItem, addOrderItems,
-    fetchProductsByKeyword, fetchProductsByCategory, fetchOrderInfo, addCupon, fetchCuponsByAccount,
+    fetchOrderInfo, addCupon, fetchCuponsByAccount,
     addAdress, fetchAdressByAccount, addPayOrder, fetchMyOrderLog, cancelOrder, fetchQuestionsByAccount,
     deleteQuestion, deleteAddress
 } from '../api/index'
+import products from "./modules/products";
 
 Vue.use(Vuex);
 
 const store = new Vuex.Store({
+    modules: {
+        products
+    },
     state: {
         account: {},
         accessToken: null,
-        products: {},
-        product: {},
+        // products: {},
+        // product: {},
         reviews: {},
         review: {},
         qnas: {},
@@ -28,11 +40,11 @@ const store = new Vuex.Store({
         orderLog: {},
         myQuestions: {},
         myAddresses: {},
-        myCupons:{}
+        myCupons: {}
     },
     mutations: {
-        LOGIN(state, { accessToken }) {
-            console.log(accessToken)
+        LOGIN(state, {accessToken}) {
+            console.log(accessToken);
             if (!accessToken) return;
             state.accessToken = accessToken;
             localStorage.accessToken = accessToken;
@@ -43,12 +55,12 @@ const store = new Vuex.Store({
             delete localStorage.accessToken;
             setAuthInHeader(null);
         },
-        SET_PRODUCTS(state, products) {
-            state.products = products;
-        },
-        SET_PRODUCT(state, product) {
-            state.product = product;
-        },
+        // SET_PRODUCTS(state, products) {
+        //     state.products = products;
+        // },
+        // SET_PRODUCT(state, product) {
+        //     state.product = product;
+        // },
         SET_REVIEWS(state, reviews) {
             state.reviews = reviews;
         },
@@ -87,47 +99,47 @@ const store = new Vuex.Store({
         }
     },
     actions: {
-        async LOGIN({ commit }, payload) {
+        async LOGIN({commit}, payload) {
             const response = await account.login(payload);
             commit('LOGIN', response.data);
             return response;
         },
-        async FETCH_PRODUCTS({ commit }) {
-            const response = await fetchProducts();
-            commit('SET_PRODUCTS', response.data);
-            return response;
-        },
-        async FETCH_PRODUCTS_BY_SEARCH_KEYWORD({ commit }, payload) {
-            const response = await fetchProductsByKeyword(payload);
-            commit('SET_PRODUCTS', response.data);
-            return response;
-        },
-        async FETCH_PRODUCTS_BY_CATEGORY({ commit }, payload) {
-            const response = await fetchProductsByCategory(payload);
-            commit('SET_PRODUCTS', response.data);
-            return response;
-        },
-        async FETCH_PRODUCT({ commit }, id) {
-            const response = await fetchProduct(id);
-            commit('SET_PRODUCT', response.data);
-            return response;
-        },
-        async FETCH_REVIEWS({ commit }, payload) {
+        // async FETCH_PRODUCTS({ commit }) {
+        //     const response = await fetchProducts();
+        //     commit('SET_PRODUCTS', response.data);
+        //     return response;
+        // },
+        // async FETCH_PRODUCTS_BY_SEARCH_KEYWORD({ commit }, payload) {
+        //     const response = await fetchProductsByKeyword(payload);
+        //     commit('SET_PRODUCTS', response.data);
+        //     return response;
+        // },
+        // async FETCH_PRODUCTS_BY_CATEGORY({ commit }, payload) {
+        //     const response = await fetchProductsByCategory(payload);
+        //     commit('SET_PRODUCTS', response.data);
+        //     return response;
+        // },
+        // async FETCH_PRODUCT({ commit }, id) {
+        //     const response = await fetchProduct(id);
+        //     commit('SET_PRODUCT', response.data);
+        //     return response;
+        // },
+        async FETCH_REVIEWS({commit}, payload) {
             const response = await fetchReviews(payload);
             commit('SET_REVIEWS', response.data);
             return response;
         },
-        async FETCH_REVIEW({ commit }, reviewId) {
+        async FETCH_REVIEW({commit}, reviewId) {
             const response = await fetchReview(reviewId);
             commit('SET_REVIEW', response.data);
             return response;
         },
-        async FETCH_QNAS({ commit }, productId) {
+        async FETCH_QNAS({commit}, productId) {
             const response = await fetchQnas(productId);
             commit('SET_QNAS', response.data);
             return response;
         },
-        async FETCH_QNA({ commit }, payload) {
+        async FETCH_QNA({commit}, payload) {
             const response = await fetchQna(payload);
             commit('SET_QNA', response.data);
             return response;
@@ -144,7 +156,7 @@ const store = new Vuex.Store({
             const response = await addQuestion(payload);
             return response;
         },
-        async FETCH_ACCOUNT_CARTS({ commit }) {
+        async FETCH_ACCOUNT_CARTS({commit}) {
             const response = await fetchAccountCarts();
             commit('SET_CARTS', response.data);
             return response;
@@ -157,7 +169,7 @@ const store = new Vuex.Store({
             const response = await addOrderItems(payload);
             return response;
         },
-        async FETCH_ORDER_INFO({ commit }, payload) {
+        async FETCH_ORDER_INFO({commit}, payload) {
             const response = await fetchOrderInfo(payload);
             commit('SET_ORDER_INFO', response.data);
             return response;
@@ -184,7 +196,7 @@ const store = new Vuex.Store({
             const response = await addPayOrder(payload);
             return response;
         },
-        async FETCH_MY_ORDER_LOG({ commit }, payload) {
+        async FETCH_MY_ORDER_LOG({commit}, payload) {
             const response = await fetchMyOrderLog(payload);
             commit('SET_ORDER_LOG', response.data);
             return response;
@@ -193,7 +205,7 @@ const store = new Vuex.Store({
             const response = await cancelOrder(payload);
             return response;
         },
-        async FETCH_QUESTIONS_BY_ACCOUNT({ commit }, payload) {
+        async FETCH_QUESTIONS_BY_ACCOUNT({commit}, payload) {
             const response = await fetchQuestionsByAccount(payload);
             commit('SET_MY_QUESTIONS', response.data);
             return response;
@@ -215,7 +227,7 @@ const store = new Vuex.Store({
     }
 });
 
-const { accessToken } = localStorage;
-store.commit('LOGIN', { accessToken });
+const {accessToken} = localStorage;
+store.commit('LOGIN', {accessToken});
 
 export default store;

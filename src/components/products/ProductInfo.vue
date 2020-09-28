@@ -61,7 +61,9 @@ export default {
     count: 0,
   }),
   computed: {
-    ...mapState(["product"]),
+    ...mapState({
+      product: state => state.products.product
+    }),
   },
   methods: {
     convertOptions,
