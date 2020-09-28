@@ -10,14 +10,13 @@ import {account, setAuthInHeader} from '../api'
 //     deleteQuestion, deleteAddress
 // } from '../api/index'
 import {
-    fetchQnas, fetchQna, fetchOrderLog,
-    addQuestion, fetchAccountCarts, deleteCartItem, addOrderItems,
+    fetchOrderLog, fetchAccountCarts, deleteCartItem, addOrderItems,
     fetchOrderInfo, addCupon, fetchCuponsByAccount,
-    addAdress, fetchAdressByAccount, addPayOrder, fetchMyOrderLog, cancelOrder, fetchQuestionsByAccount,
-    deleteQuestion, deleteAddress
+    addAdress, fetchAdressByAccount, addPayOrder, fetchMyOrderLog, cancelOrder, deleteAddress
 } from '../api/index'
 import products from "./modules/products";
 import reviews from "./modules/reviews";
+import questions from "./modules/questions";
 
 Vue.use(Vuex);
 
@@ -25,21 +24,15 @@ const store = new Vuex.Store({
     modules: {
         reviews,
         products,
+        questions
     },
     state: {
         account: {},
         accessToken: null,
-        // products: {},
-        // product: {},
-        // reviews: {},
-        // review: {},
-        qnas: {},
-        qna: {},
         carts: {},
         orderInfo: {},
         payInfo: {},
         orderLog: {},
-        myQuestions: {},
         myAddresses: {},
         myCupons: {}
     },
@@ -56,18 +49,6 @@ const store = new Vuex.Store({
             delete localStorage.accessToken;
             setAuthInHeader(null);
         },
-        // SET_REVIEWS(state, reviews) {
-        //     state.reviews = reviews;
-        // },
-        // SET_REVIEW(state, review) {
-        //     state.review = review;
-        // },
-        SET_QNAS(state, qnas) {
-            state.qnas = qnas;
-        },
-        SET_QNA(state, qna) {
-            state.qna = qna;
-        },
         SET_CARTS(state, carts) {
             state.carts = carts;
         },
@@ -83,9 +64,6 @@ const store = new Vuex.Store({
         SET_ORDER_LOG(state, orderLog) {
             state.orderLog = orderLog;
         },
-        SET_MY_QUESTIONS(state, myQuestions) {
-            state.myQuestions = myQuestions;
-        },
         SET_MY_ADDRESSES(state, myAddresses) {
             state.myAddresses = myAddresses;
         },
@@ -99,56 +77,18 @@ const store = new Vuex.Store({
             commit('LOGIN', response.data);
             return response;
         },
-        // async FETCH_PRODUCTS({ commit }) {
-        //     const response = await fetchProducts();
-        //     commit('SET_PRODUCTS', response.data);
+        // async FETCH_QNAS({commit}, productId) {
+        //     const response = await fetchQnas(productId);
+        //     commit('SET_QNAS', response.data);
         //     return response;
         // },
-        // async FETCH_PRODUCTS_BY_SEARCH_KEYWORD({ commit }, payload) {
-        //     const response = await fetchProductsByKeyword(payload);
-        //     commit('SET_PRODUCTS', response.data);
-        //     return response;
-        // },
-        // async FETCH_PRODUCTS_BY_CATEGORY({ commit }, payload) {
-        //     const response = await fetchProductsByCategory(payload);
-        //     commit('SET_PRODUCTS', response.data);
-        //     return response;
-        // },
-        // async FETCH_PRODUCT({ commit }, id) {
-        //     const response = await fetchProduct(id);
-        //     commit('SET_PRODUCT', response.data);
-        //     return response;
-        // },
-        // async FETCH_REVIEWS({commit}, payload) {
-        //     const response = await fetchReviews(payload);
-        //     commit('SET_REVIEWS', response.data);
-        //     return response;
-        // },
-        // async FETCH_REVIEW({commit}, reviewId) {
-        //     const response = await fetchReview(reviewId);
-        //     commit('SET_REVIEW', response.data);
-        //     return response;
-        // },
-        async FETCH_QNAS({commit}, productId) {
-            const response = await fetchQnas(productId);
-            commit('SET_QNAS', response.data);
-            return response;
-        },
-        async FETCH_QNA({commit}, payload) {
-            const response = await fetchQna(payload);
-            commit('SET_QNA', response.data);
-            return response;
-        },
-        // async ADD_REVIEW(_, payload) {
-        //     const response = await addReview(payload);
+        // async FETCH_QNA({commit}, payload) {
+        //     const response = await fetchQna(payload);
+        //     commit('SET_QNA', response.data);
         //     return response;
         // },
         async FETCH_ORDERLOG(_, payload) {
             const response = await fetchOrderLog(payload);
-            return response;
-        },
-        async ADD_QUESTION(_, payload) {
-            const response = await addQuestion(payload);
             return response;
         },
         async FETCH_ACCOUNT_CARTS({commit}) {
@@ -173,10 +113,8 @@ const store = new Vuex.Store({
             const response = await addCupon(payload);
             return response;
         },
-        // async FETCH_CUPONS_BY_ACCOUNT({ commit }, payload) {
         async FETCH_CUPONS_BY_ACCOUNT(payload) {
             const response = await fetchCuponsByAccount(payload);
-            // commit('SET_CUPONS', response.data.accountCupons);
             return response;
         },
         async ADD_ADDRESS(_, payload) {
@@ -200,15 +138,15 @@ const store = new Vuex.Store({
             const response = await cancelOrder(payload);
             return response;
         },
-        async FETCH_QUESTIONS_BY_ACCOUNT({commit}, payload) {
-            const response = await fetchQuestionsByAccount(payload);
-            commit('SET_MY_QUESTIONS', response.data);
-            return response;
-        },
-        async DELETE_QUESTION(_, payload) {
-            const response = await deleteQuestion(payload);
-            return response;
-        },
+        // async FETCH_QUESTIONS_BY_ACCOUNT({commit}, payload) {
+        //     const response = await fetchQuestionsByAccount(payload);
+        //     commit('SET_MY_QUESTIONS', response.data);
+        //     return response;
+        // },
+        // async DELETE_QUESTION(_, payload) {
+        //     const response = await deleteQuestion(payload);
+        //     return response;
+        // },
         async DELETE_ADDRESS(_, payload) {
             const response = await deleteAddress(payload);
             return response;
