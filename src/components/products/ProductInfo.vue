@@ -90,6 +90,7 @@ export default {
       if (!this.validate()) {
         return;
       }
+      // todo cart 추가 api 없음
       console.log("addCart");
     },
     extractOptionNames(options) {
