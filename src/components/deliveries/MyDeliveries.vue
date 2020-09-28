@@ -62,7 +62,7 @@ export default {
     });
   },
   computed: {
-    ...mapState(["myAddresses"]),
+    ...mapState({myAddresses: state => state.addresses.myAddresses}),
   },
   methods: {
     ...mapMutations(["SET_MY_ADDRESSES"]),

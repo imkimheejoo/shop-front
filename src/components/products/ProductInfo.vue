@@ -43,7 +43,7 @@
             </v-col>
           </v-row>
           <v-btn class="mr-4" color="teal accent-4" dark @click="addCart">cart</v-btn>
-          <v-btn class="mr-4" color="teal accent-4" dark @click="submit">submit</v-btn>
+          <v-btn class="mr-4" color="teal accent-4" dark @click="submit">Pay</v-btn>
         </v-form>
       </v-row>
     </v-col>
@@ -61,7 +61,9 @@ export default {
     count: 0,
   }),
   computed: {
-    ...mapState(["product"]),
+    ...mapState({
+      product: state => state.products.product
+    }),
   },
   methods: {
     convertOptions,
@@ -77,6 +79,7 @@ export default {
       for (let i = 0; i < this.product.options.length; i++) {
         if (this.product.options[i].name === this.option) {
           optionId = this.product.options[i].id;
+          // todo 주문페이지로 가는 api 없음
           console.log(optionId, this.option);
           break;
         }
@@ -88,6 +91,7 @@ export default {
       if (!this.validate()) {
         return;
       }
+      // todo cart 추가 api 없음
       console.log("addCart");
     },
     extractOptionNames(options) {

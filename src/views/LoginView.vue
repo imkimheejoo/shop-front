@@ -44,7 +44,7 @@ export default {
       const {email,password}=this;
       this.LOGIN({email,password})
         .then(() => {
-           this.$router.push(this.returnPath)
+           this.$router.push(this.returnPath).catch(() => {});
         }).catch(({response})=> {
           alert(response.data.message);
         });

@@ -63,7 +63,7 @@ export default {
 
     onLogout() {
       this.LOGOUT();
-      this.$router.push("/");
+      this.$router.push("/").catch(() => {});
     },
   },
 };
