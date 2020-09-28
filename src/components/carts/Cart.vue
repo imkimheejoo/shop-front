@@ -111,7 +111,7 @@
             prepareOrderWithItems() {
                 this.ADD_ORDER_ITEMS({cartItems: this.selected})
                     .then(({data}) => {
-                        this.$router.push(`/orders/${data.orderId}`);
+                        this.$router.push(`/orders/${data.orderId}`).catch(() => {});
                     })
                     .catch((error) => {
                         alert(error);

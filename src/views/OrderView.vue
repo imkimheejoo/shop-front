@@ -87,7 +87,7 @@
                             alert(
                                 "결제가 완료되었습니다! 주문내역은 마이페이지에서 조회 가능합니다."
                             );
-                            this.$router.push(`/mypage`);
+                            this.$router.push(`/mypage`).catch(() => {});
                         } else if (response.data >= 400) {
                             alert(response.data.message);
                         }
