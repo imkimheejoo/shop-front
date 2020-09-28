@@ -53,7 +53,7 @@ export default {
     });
   },
   computed: {
-    ...mapState(["myCupons"]),
+    ...mapState({myCupons : state => state.cupons.myCupons}),
   },
   methods: {
     ...mapMutations(["SET_MY_CUPONS"]),
