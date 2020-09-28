@@ -10,13 +10,14 @@ import {account, setAuthInHeader} from '../api'
 //     deleteQuestion, deleteAddress
 // } from '../api/index'
 import {
-    fetchOrderLog, fetchAccountCarts, deleteCartItem, addOrderItems,
-    fetchOrderInfo, addCupon, fetchCuponsByAccount,
-    addAdress, fetchAdressByAccount, addPayOrder, fetchMyOrderLog, cancelOrder, deleteAddress
+    fetchAccountCarts, deleteCartItem, addOrderItems,
+    addCupon, fetchCuponsByAccount,
+    addAdress, fetchAdressByAccount, deleteAddress
 } from '../api/index'
 import products from "./modules/products";
 import reviews from "./modules/reviews";
 import questions from "./modules/questions";
+import orders from "./modules/orders";
 
 Vue.use(Vuex);
 
@@ -24,15 +25,16 @@ const store = new Vuex.Store({
     modules: {
         reviews,
         products,
-        questions
+        questions,
+        orders
     },
     state: {
         account: {},
         accessToken: null,
         carts: {},
-        orderInfo: {},
-        payInfo: {},
-        orderLog: {},
+        // orderInfo: {},
+        // payInfo: {},
+        // orderLog: {},
         myAddresses: {},
         myCupons: {}
     },
@@ -52,18 +54,18 @@ const store = new Vuex.Store({
         SET_CARTS(state, carts) {
             state.carts = carts;
         },
-        SET_ORDER_INFO(state, orderInfo) {
-            state.orderInfo = orderInfo;
-        },
-        SET_PAY_INFO(state, payInfo) {
-            state.payInfo = payInfo;
-        },
+        // SET_ORDER_INFO(state, orderInfo) {
+        //     state.orderInfo = orderInfo;
+        // },
+        // SET_PAY_INFO(state, payInfo) {
+        //     state.payInfo = payInfo;
+        // },
         SET_CUPONS(state, cupons) {
             state.orderInfo.accountCupons = cupons;
         },
-        SET_ORDER_LOG(state, orderLog) {
-            state.orderLog = orderLog;
-        },
+        // SET_ORDER_LOG(state, orderLog) {
+        //     state.orderLog = orderLog;
+        // },
         SET_MY_ADDRESSES(state, myAddresses) {
             state.myAddresses = myAddresses;
         },
@@ -77,20 +79,10 @@ const store = new Vuex.Store({
             commit('LOGIN', response.data);
             return response;
         },
-        // async FETCH_QNAS({commit}, productId) {
-        //     const response = await fetchQnas(productId);
-        //     commit('SET_QNAS', response.data);
+        // async FETCH_ORDERLOG(_, payload) {
+        //     const response = await fetchOrderLog(payload);
         //     return response;
         // },
-        // async FETCH_QNA({commit}, payload) {
-        //     const response = await fetchQna(payload);
-        //     commit('SET_QNA', response.data);
-        //     return response;
-        // },
-        async FETCH_ORDERLOG(_, payload) {
-            const response = await fetchOrderLog(payload);
-            return response;
-        },
         async FETCH_ACCOUNT_CARTS({commit}) {
             const response = await fetchAccountCarts();
             commit('SET_CARTS', response.data);
@@ -104,11 +96,11 @@ const store = new Vuex.Store({
             const response = await addOrderItems(payload);
             return response;
         },
-        async FETCH_ORDER_INFO({commit}, payload) {
-            const response = await fetchOrderInfo(payload);
-            commit('SET_ORDER_INFO', response.data);
-            return response;
-        },
+        // async FETCH_ORDER_INFO({commit}, payload) {
+        //     const response = await fetchOrderInfo(payload);
+        //     commit('SET_ORDER_INFO', response.data);
+        //     return response;
+        // },
         async ADD_CUPON(_, payload) {
             const response = await addCupon(payload);
             return response;
@@ -125,28 +117,20 @@ const store = new Vuex.Store({
             const response = await fetchAdressByAccount(payload);
             return response;
         },
-        async ADD_PAY_ORDER(_, payload) {
-            const response = await addPayOrder(payload);
-            return response;
-        },
-        async FETCH_MY_ORDER_LOG({commit}, payload) {
-            const response = await fetchMyOrderLog(payload);
-            commit('SET_ORDER_LOG', response.data);
-            return response;
-        },
-        async CANCEL_ORDER(_, payload) {
-            const response = await cancelOrder(payload);
-            return response;
-        },
-        // async FETCH_QUESTIONS_BY_ACCOUNT({commit}, payload) {
-        //     const response = await fetchQuestionsByAccount(payload);
-        //     commit('SET_MY_QUESTIONS', response.data);
+        // async ADD_PAY_ORDER(_, payload) {
+        //     const response = await addPayOrder(payload);
         //     return response;
         // },
-        // async DELETE_QUESTION(_, payload) {
-        //     const response = await deleteQuestion(payload);
+        // async FETCH_MY_ORDER_LOG({commit}, payload) {
+        //     const response = await fetchMyOrderLog(payload);
+        //     commit('SET_ORDER_LOG', response.data);
         //     return response;
         // },
+        // async CANCEL_ORDER(_, payload) {
+        //     const response = await cancelOrder(payload);
+        //     return response;
+        // },
+
         async DELETE_ADDRESS(_, payload) {
             const response = await deleteAddress(payload);
             return response;
