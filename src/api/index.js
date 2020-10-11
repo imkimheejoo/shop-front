@@ -71,7 +71,10 @@ function fetchProductsByKeyword(payload) {
 
 function fetchProductsByCategory(payload) {
     try {
-        return axios.get(`/api/products/category?category=${payload.category}`)
+        console.log('payload',payload);
+        return request.get(`/api/products/category/${payload.category}?
+        &page=${payload.page === null ? 0 : payload.page}
+        &size=${payload.size}`)
     } catch (error) {
         alert(error);
     }

@@ -7,7 +7,6 @@ const state = {
 
 const mutations = {
     SET_PRODUCTS(state, products) {
-        console.log('set products', products);
         state.products = products;
     },
     SET_PRODUCT(state, product) {
@@ -17,7 +16,6 @@ const mutations = {
 
 const actions = {
     async FETCH_PRODUCTS({ commit }, payload) {
-        console.log('fetch products ', payload);
         const response = await fetchProducts(payload);
         commit('SET_PRODUCTS', response.data);
         return response;

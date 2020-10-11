@@ -85,7 +85,7 @@ export const router = new VueRouter({
             name: 'productsByCategory',
             component: IndexView,
             beforeEnter: (to, from, next) => {
-                store.dispatch('FETCH_PRODUCTS_BY_CATEGORY', ({ keyword: to.params.category }))
+                store.dispatch('FETCH_PRODUCTS_BY_CATEGORY', ({ category: to.params.category }))
                     .then(() => {
                         next()
                     }).catch(error => {
