@@ -2,7 +2,7 @@
     <v-container class="mt-5">
         <v-row v-if="this.products" align="center" justify="center">
             <card
-                    v-for="(product,index) in this.products.contents"
+                    v-for="(product,index) in this.products.content"
                     class="ma-2"
                     :key="index"
                     cols="12"
@@ -27,7 +27,8 @@
     export default {
         data() {
             return {
-                page: 3,
+                page: 0,
+                size: 12
             };
         },
         components: {
@@ -35,7 +36,7 @@
         },
         watch: {
             page() {
-                this.FETCH_PRODUCTS(this.page);
+                this.FETCH_PRODUCTS({page : this.page, size: this.size});
             },
         },
         computed: {

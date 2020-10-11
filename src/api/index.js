@@ -53,9 +53,9 @@ export const account = {
 };
 
 
-function fetchProducts() {
+function fetchProducts(payload) {
     try {
-        return axios.get(`/api/products`);
+        return request.get(`/api/products?page=${payload.page}&size=${payload.size}`);
     } catch (error) {
         alert(error);
     }

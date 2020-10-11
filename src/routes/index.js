@@ -24,9 +24,8 @@ export const router = new VueRouter({
             path: '/',
             component: IndexView,
             beforeEnter: (to, from, next) => {
-                store.dispatch('FETCH_PRODUCTS')
-                    .then(() => {
-                        console.log('success');
+                store.dispatch('FETCH_PRODUCTS', {page: 0, size:12})
+                .then(() => {
                         next();
                     }).catch((error) => {
                         console.log(error);

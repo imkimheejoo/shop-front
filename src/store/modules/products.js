@@ -16,8 +16,9 @@ const mutations = {
 };
 
 const actions = {
-    async FETCH_PRODUCTS({ commit }) {
-        const response = await fetchProducts();
+    async FETCH_PRODUCTS({ commit }, payload) {
+        console.log('fetch products ', payload);
+        const response = await fetchProducts(payload);
         commit('SET_PRODUCTS', response.data);
         return response;
     },
