@@ -11,7 +11,7 @@
         flat
         hide-no-data
         hide-details
-        @keyup.enter="searchByKeyword"
+        @keyup.enter="searchByKeyword()"
         label="검색어를 입력하세요."
         solo-inverted
       ></v-autocomplete>
@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { mapMutations, mapGetters } from "vuex";
+import { mapMutations, mapGetters, mapActions } from "vuex";
 
 export default {
   name: "Navbar",
@@ -52,13 +52,15 @@ export default {
   },
   methods: {
     ...mapMutations(["LOGOUT"]),
+    ...mapActions(["FETCH_PRODUCTS_BY_SEARCH_KEYWORD"]),
 
     showCategoryTab() {
         this.$emit('showTab');
     },
 
     searchByKeyword() {
-      this.$router.push(`/products/search/${this.search}`).catch(() => {});
+      this.FETCH_PRODUCTS_BY_SEARCH_KEYWORD({keyword: this.search});
+      // this.$router.push(`/products/search/${this.search}`).catch(() => {});
     },
 
     onLogout() {
