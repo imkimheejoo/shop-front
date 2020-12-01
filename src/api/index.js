@@ -63,7 +63,11 @@ function fetchProducts(payload) {
 
 function fetchProductsByKeyword(payload) {
   try {
-    return axios.get(`/api/products/search?keyword=${payload.keyword}`);
+    return request.get(
+      `/api/products/search/${payload.keyword}?page=${
+        payload.page === null ? 0 : payload.page - 1
+      }&size=${payload.size}`
+    );
   } catch (error) {
     alert(error);
   }
@@ -71,9 +75,11 @@ function fetchProductsByKeyword(payload) {
 
 function fetchProductsByCategory(payload) {
   try {
-    return request.get(`/api/products/category/${payload.category}?
-        &page=${payload.page === null ? 0 : payload.page - 1}
-        &size=${payload.size}`);
+    return request.get(
+      `/api/products/category/${payload.category}?page=${
+        payload.page === null ? 0 : payload.page - 1
+      }&size=${payload.size}`
+    );
   } catch (error) {
     alert(error);
   }
